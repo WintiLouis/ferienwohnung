@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+  <!-- Eigene Illustration: Haus am Seeufer -->
+  <defs>
+    <linearGradient id="himmel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#bcd6d2"/>
+      <stop offset="1" stop-color="#f1f2ed"/>
+    </linearGradient>
+    <linearGradient id="wasser" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5f9893"/>
+      <stop offset="1" stop-color="#174a4a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Himmel und Berge -->
+  <rect width="1200" height="500" fill="url(#himmel)"/>
+  <path d="M0 430 L160 280 L280 360 L420 220 L560 380 L700 300 L860 400 L1000 260 L1200 380 L1200 500 L0 500 Z" fill="#a3bfba"/>
+  <g fill="#ffffff">
+    <path d="M420 220 L386 268 L404 262 L420 280 L436 263 L458 270 Z"/>
+    <path d="M1000 260 L966 306 L984 300 L1000 318 L1016 301 L1038 308 Z"/>
+  </g>
+  <path d="M0 500 L140 420 L300 470 L460 410 L640 490 L0 500 Z" fill="#6c918c"/>
+
+  <!-- See -->
+  <rect y="490" width="1200" height="310" fill="url(#wasser)"/>
+  <g fill="#ffffff" opacity="0.25">
+    <rect x="120" y="560" width="200" height="3" rx="1.5"/>
+    <rect x="200" y="620" width="140" height="3" rx="1.5"/>
+    <rect x="80" y="700" width="260" height="3" rx="1.5"/>
+  </g>
+
+  <!-- Wiese rechts -->
+  <path d="M560 800 L560 540 C640 500 760 470 900 465 C1020 462 1120 470 1200 480 L1200 800 Z" fill="#4f7d6e"/>
+  <path d="M560 800 L560 600 C700 580 900 590 1200 560 L1200 800 Z" fill="#3f6b5d"/>
+
+  <!-- Steg mit Boot -->
+  <rect x="360" y="572" width="230" height="12" fill="#7b5a43"/>
+  <g fill="#5e4433">
+    <rect x="380" y="584" width="8" height="36"/>
+    <rect x="460" y="584" width="8" height="36"/>
+    <rect x="540" y="584" width="8" height="36"/>
+  </g>
+  <path d="M290 600 L380 600 L366 616 L304 616 Z" fill="#fbfaf7"/>
+
+  <!-- Bäume -->
+  <g>
+    <rect x="1094" y="380" width="12" height="100" fill="#5e4433"/>
+    <circle cx="1100" cy="360" r="60" fill="#2f5f52"/>
+    <circle cx="1070" cy="390" r="40" fill="#2f5f52"/>
+    <rect x="625" y="430" width="10" height="80" fill="#5e4433"/>
+    <circle cx="630" cy="415" r="42" fill="#3a6d5f"/>
+  </g>
+
+  <!-- Haus -->
+  <g>
+    <!-- Wände -->
+    <rect x="720" y="250" width="280" height="260" fill="#f3efe6"/>
+    <!-- Dach -->
+    <path d="M696 256 L860 150 L1024 256 Z" fill="#0f3d3e"/>
+    <!-- Kamin -->
+    <rect x="940" y="168" width="26" height="56" fill="#0f3d3e"/>
+    <!-- Dachfenster -->
+    <rect x="836" y="196" width="48" height="40" fill="#a9cbd0" stroke="#ffffff" stroke-width="5"/>
+    <!-- Fenster oben -->
+    <g fill="#a9cbd0" stroke="#ffffff" stroke-width="5">
+      <rect x="750" y="280" width="64" height="76"/>
+      <rect x="828" y="280" width="64" height="76"/>
+      <rect x="906" y="280" width="64" height="76"/>
+    </g>
+    <!-- Balkon -->
+    <rect x="730" y="360" width="260" height="10" fill="#7b5a43"/>
+    <g stroke="#7b5a43" stroke-width="4">
+      <line x1="734" y1="330" x2="986" y2="330"/>
+      <line x1="750" y1="330" x2="750" y2="360"/>
+      <line x1="790" y1="330" x2="790" y2="360"/>
+      <line x1="830" y1="330" x2="830" y2="360"/>
+      <line x1="870" y1="330" x2="870" y2="360"/>
+      <line x1="910" y1="330" x2="910" y2="360"/>
+      <line x1="950" y1="330" x2="950" y2="360"/>
+    </g>
+    <!-- Fenster unten und Tür -->
+    <g fill="#a9cbd0" stroke="#ffffff" stroke-width="5">
+      <rect x="750" y="400" width="64" height="70"/>
+      <rect x="906" y="400" width="64" height="70"/>
+    </g>
+    <rect x="836" y="400" width="50" height="110" fill="#2e8b7a"/>
+    <circle cx="876" cy="458" r="4" fill="#f3efe6"/>
+  </g>
+</svg>

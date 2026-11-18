@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+  <!-- Eigene Illustration: Wohnzimmer mit Seeblick -->
+  <defs>
+    <linearGradient id="aussen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c3dad6"/>
+      <stop offset="1" stop-color="#eef1ec"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Wand und Boden -->
+  <rect width="1200" height="570" fill="#efe9df"/>
+  <rect y="570" width="1200" height="230" fill="#c9b39b"/>
+  <g stroke="#b59f87" stroke-width="2">
+    <line x1="0" y1="620" x2="1200" y2="620"/>
+    <line x1="0" y1="680" x2="1200" y2="680"/>
+    <line x1="0" y1="745" x2="1200" y2="745"/>
+  </g>
+  <rect y="562" width="1200" height="10" fill="#e2d9cb"/>
+
+  <!-- Grosses Fenster mit Seeblick -->
+  <rect x="640" y="90" width="460" height="390" fill="url(#aussen)"/>
+  <path d="M640 330 L720 250 L790 300 L880 200 L980 300 L1040 260 L1100 300 L1100 380 L640 380 Z" fill="#a3bfba"/>
+  <path d="M880 200 L858 232 L872 228 L880 240 L890 229 L904 234 Z" fill="#ffffff"/>
+  <rect x="640" y="380" width="460" height="100" fill="#3f7f7a"/>
+  <rect x="700" y="420" width="120" height="3" fill="#ffffff" opacity="0.4"/>
+  <g fill="none" stroke="#ffffff" stroke-width="12">
+    <rect x="640" y="90" width="460" height="390"/>
+    <line x1="870" y1="90" x2="870" y2="480"/>
+  </g>
+  <rect x="626" y="480" width="488" height="14" fill="#ffffff"/>
+
+  <!-- Vorhang -->
+  <rect x="590" y="70" width="44" height="440" fill="#9fbdb5"/>
+  <rect x="580" y="62" width="560" height="8" fill="#7b5a43"/>
+
+  <!-- Bild an der Wand -->
+  <rect x="210" y="140" width="220" height="150" fill="#fbfaf7" stroke="#7b5a43" stroke-width="8"/>
+  <path d="M226 260 C270 230 300 250 330 235 C360 220 390 240 414 228 L414 274 L226 274 Z" fill="#2e8b7a" opacity="0.7"/>
+  <circle cx="370" cy="185" r="18" fill="#9fbdb5"/>
+
+  <!-- Stehlampe -->
+  <line x1="80" y1="320" x2="80" y2="640" stroke="#0f3d3e" stroke-width="6"/>
+  <ellipse cx="80" cy="642" rx="34" ry="8" fill="#0f3d3e"/>
+  <path d="M40 330 L120 330 L104 270 L56 270 Z" fill="#fbfaf7" stroke="#d6cfc2" stroke-width="2"/>
+
+  <!-- Teppich -->
+  <ellipse cx="390" cy="690" rx="330" ry="62" fill="#e6dfd2"/>
+
+  <!-- Sofa -->
+  <rect x="120" y="350" width="460" height="120" rx="26" fill="#7fa69e"/>
+  <rect x="120" y="440" width="460" height="110" rx="20" fill="#8fb3ab"/>
+  <rect x="100" y="410" width="60" height="140" rx="22" fill="#7fa69e"/>
+  <rect x="540" y="410" width="60" height="140" rx="22" fill="#7fa69e"/>
+  <rect x="190" y="380" width="110" height="80" rx="20" fill="#e8f0ee"/>
+  <rect x="400" y="380" width="110" height="80" rx="20" fill="#fbfaf7"/>
+  <g fill="#5e4433">
+    <rect x="140" y="550" width="14" height="30"/>
+    <rect x="546" y="550" width="14" height="30"/>
+  </g>
+
+  <!-- Couchtisch -->
+  <rect x="270" y="610" width="250" height="18" rx="6" fill="#7b5a43"/>
+  <g fill="#5e4433">
+    <rect x="290" y="628" width="12" height="54"/>
+    <rect x="488" y="628" width="12" height="54"/>
+  </g>
+  <!-- Tasse und Buch -->
+  <rect x="310" y="592" width="80" height="18" fill="#2e8b7a"/>
+  <rect x="440" y="588" width="28" height="22" rx="4" fill="#fbfaf7"/>
+  <path d="M468 594 C480 594 480 606 468 606" fill="none" stroke="#fbfaf7" stroke-width="4"/>
+
+  <!-- Pflanze -->
+  <path d="M1040 610 L1120 610 L1110 700 L1050 700 Z" fill="#0f3d3e"/>
+  <g fill="#2e8b7a">
+    <ellipse cx="1060" cy="560" rx="22" ry="56" transform="rotate(-25 1060 560)"/>
+    <ellipse cx="1100" cy="550" rx="22" ry="60" transform="rotate(20 1100 550)"/>
+    <ellipse cx="1080" cy="530" rx="20" ry="66"/>
+  </g>
+</svg>

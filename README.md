@@ -15,15 +15,20 @@ Schulprojekt zum Einstieg in die Frontendentwicklung.
 - Ruhige, gut lesbare Schrift mit viel Weissraum (Wikipedia)
 - Einheitliche Linien-Icons statt Emojis, wenige Farben mit einem Akzent
 
-## Bildnachweis
-Alle Fotos von [Unsplash](https://unsplash.com) (Unsplash License), direkt verlinkt:
-- [Berge und See](https://unsplash.com/photos/mountains-and-a-lake-on-a-bright-sunny-day-idneka5RWlE) – Miltiadis Fragkidis
-- [Haus am See](https://unsplash.com/photos/a-view-of-a-lake-with-a-house-in-the-background-XdYmX7QwtDA) – Aravind Sreekumar Nair
-- [Wohnzimmer](https://unsplash.com/photos/sunlit-living-room-with-cream-sofa-and-wooden-coffee-table-GAy2D33TngI) – Kevin Lieder
-- [Schlafzimmer](https://unsplash.com/photos/a-bedroom-with-a-bed-and-a-table-in-it-qPHpk6G9nik) – Prydumano Design
+## Bilder
+- `img/*.jpg`: KI-generiert mit Microsoft Copilot, als JPG verkleinert
+  (zusammen ca. 1,1 MB). Es sind **keine echten Fotos** der Wohnung.
+- `img/*.svg`: eigene Illustrationen als SVG-Code, als Reserve.
+
+## Features
+- **Belegungskalender:** Monatsansicht mit belegten Tagen. Anreise und Abreise
+  per Klick wählen, die Daten landen im Formular. Belegte Zeiträume stehen in
+  `app.js` in der Liste `belegteZeitraeume`.
+- **Anfrageformular:** prüft Name, E-Mail, Daten, Mindestaufenthalt und
+  Belegung, berechnet den Preis. Demo: Es wird nichts verschickt.
+- **Bewertungen:** Bereich mit Beispieltexten als Platzhalter für echte Bewertungen.
 
 ## Ideen für nächste Features
-- Eigene Fotos der Wohnung statt Unsplash-Bilder
-- Belegungskalender
-- Kontaktformular
-- Echte Gästebewertungen
+- Echte Bewertungen von Gästen einfügen
+- Formular mit einem Dienst wie Formspree wirklich verschicken
+- Echte Fotos der Wohnung statt KI-Bilder

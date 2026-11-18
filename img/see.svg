@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <!-- Eigene Illustration: See mit Bergen -->
+  <defs>
+    <linearGradient id="himmel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b7d2ce"/>
+      <stop offset="1" stop-color="#eef1ec"/>
+    </linearGradient>
+    <linearGradient id="wasser" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6a9f99"/>
+      <stop offset="1" stop-color="#0f3d3e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Himmel und Sonne -->
+  <rect width="1600" height="580" fill="url(#himmel)"/>
+  <circle cx="1180" cy="200" r="70" fill="#ffffff" opacity="0.75"/>
+
+  <!-- Wolken -->
+  <g fill="#ffffff" opacity="0.6">
+    <ellipse cx="300" cy="150" rx="120" ry="22"/>
+    <ellipse cx="380" cy="135" rx="80" ry="20"/>
+    <ellipse cx="900" cy="110" rx="140" ry="18"/>
+  </g>
+
+  <!-- Hintere Berge -->
+  <path d="M0 520 L140 380 L240 450 L380 250 L520 430 L640 340 L780 470 L900 290 L1040 420 L1160 330 L1300 450 L1440 300 L1600 430 L1600 580 L0 580 Z" fill="#a3bfba"/>
+  <!-- Schnee -->
+  <g fill="#ffffff">
+    <path d="M380 250 L340 310 L362 300 L380 322 L398 302 L424 312 Z"/>
+    <path d="M900 290 L862 345 L884 336 L900 356 L918 338 L942 348 Z"/>
+    <path d="M1440 300 L1400 356 L1422 346 L1440 366 L1458 348 L1484 358 Z"/>
+  </g>
+
+  <!-- Vordere Berge -->
+  <path d="M0 580 L120 480 L260 540 L420 430 L600 550 L760 470 L920 555 L1100 450 L1280 550 L1440 480 L1600 530 L1600 580 Z" fill="#6c918c"/>
+
+  <!-- See -->
+  <rect y="580" width="1600" height="320" fill="url(#wasser)"/>
+  <!-- Spiegelungen -->
+  <g fill="#ffffff" opacity="0.25">
+    <rect x="1100" y="610" width="160" height="4" rx="2"/>
+    <rect x="1130" y="640" width="100" height="3" rx="1.5"/>
+    <rect x="1150" y="668" width="60" height="3" rx="1.5"/>
+    <rect x="300" y="700" width="220" height="3" rx="1.5"/>
+    <rect x="820" y="760" width="180" height="3" rx="1.5"/>
+  </g>
+
+  <!-- Segelboot -->
+  <g transform="translate(640 640)">
+    <path d="M0 30 L90 30 L76 46 L12 46 Z" fill="#fbfaf7"/>
+    <path d="M44 28 L44 -50 L84 26 Z" fill="#fbfaf7"/>
+    <path d="M40 28 L40 -30 L10 26 Z" fill="#e8f0ee"/>
+  </g>
+
+  <!-- Ufer links mit Bäumen -->
+  <path d="M0 900 L0 690 C200 670 360 740 520 800 C640 845 700 880 760 900 Z" fill="#123f3a"/>
+  <g fill="#0b2f2c">
+    <path d="M60 700 L90 600 L120 700 Z"/>
+    <path d="M120 700 L160 570 L200 700 Z"/>
+    <path d="M200 710 L230 620 L260 710 Z"/>
+    <path d="M290 725 L320 640 L350 725 Z"/>
+  </g>
+
+  <!-- Ufer rechts -->
+  <path d="M1600 900 L1600 730 C1480 750 1380 820 1290 900 Z" fill="#123f3a"/>
+  <g fill="#0b2f2c">
+    <path d="M1470 760 L1500 670 L1530 760 Z"/>
+    <path d="M1530 750 L1565 640 L1600 750 Z"/>
+  </g>
+</svg>

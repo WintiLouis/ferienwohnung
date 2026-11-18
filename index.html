@@ -25,7 +25,8 @@
         <a href="#wohnung">Wohnung</a>
         <a href="#galerie">Bilder</a>
         <a href="#preise">Preise</a>
-        <a href="#kontakt">Kontakt</a>
+        <a href="#verfuegbarkeit">Verfügbarkeit</a>
+        <a href="#bewertungen">Bewertungen</a>
         <a href="#kontakt" class="button button-klein">Anfragen</a>
       </nav>
     </div>
@@ -36,11 +37,11 @@
     <div class="container hero-inhalt">
       <h1>Ferienwohnung Seeblick</h1>
       <p class="hero-text">Drei Zimmer, ein Balkon und der See direkt vor dem Fenster.</p>
-      <a href="#kontakt" class="button">Verfügbarkeit anfragen</a>
+      <a href="#verfuegbarkeit" class="button">Freie Daten ansehen</a>
     </div>
   </section>
 
-  <!-- ===== Eckdaten: eine schlichte Zeile unter dem Foto ===== -->
+  <!-- ===== Eckdaten ===== -->
   <div class="eckdaten">
     <ul class="container">
       <li><strong>4</strong> Personen</li>
@@ -52,7 +53,7 @@
   </div>
 
   <main>
-    <!-- ===== Die Wohnung: schmaler Text, grösseres Bild ===== -->
+    <!-- ===== Die Wohnung ===== -->
     <section id="wohnung" class="abschnitt">
       <div class="container wohnung">
         <div class="wohnung-text">
@@ -60,11 +61,11 @@
           <p>Unsere Wohnung liegt im obersten Stock eines kleinen Hauses am Seeufer. Morgens scheint die Sonne ins Wohnzimmer, abends sitzt man auf dem Balkon und schaut zu, wie die Berge im Wasser dunkler werden.</p>
           <p>Platz ist für vier Personen. Familien mit Kindern sind genauso willkommen wie zwei befreundete Paare.</p>
         </div>
-        <img src="https://images.unsplash.com/photo-1783110688453-4bf5d4c87a61?w=1000&auto=format&fit=crop&q=75" alt="Helles Wohnzimmer mit Sofa und Holztisch" loading="lazy">
+        <img src="img/wohnzimmer.jpg" alt="Wohnzimmer mit grünem Sofa, Holztisch und grossem Fenster zum See" width="1536" height="1024">
       </div>
     </section>
 
-    <!-- ===== Ausstattung: einfache Liste mit Trennlinien ===== -->
+    <!-- ===== Ausstattung ===== -->
     <section class="abschnitt abschnitt-flaeche">
       <div class="container">
         <h2>Ausstattung</h2>
@@ -97,21 +98,21 @@
       </div>
     </section>
 
-    <!-- ===== Galerie: Raster auf dem Laptop, Wischen auf dem Handy ===== -->
+    <!-- ===== Galerie mit eigenen Illustrationen ===== -->
     <section id="galerie" class="abschnitt">
       <div class="container">
         <h2>Bilder</h2>
         <div class="galerie">
-          <img src="https://images.unsplash.com/photo-1693647427853-c6ae52add38a?w=1000&auto=format&fit=crop&q=75" alt="Haus am Seeufer mit Bergen im Hintergrund" loading="lazy">
-          <img src="https://images.unsplash.com/photo-1783110688453-4bf5d4c87a61?w=700&auto=format&fit=crop&q=75" alt="Helles Wohnzimmer mit Sofa und Holztisch" loading="lazy">
-          <img src="https://images.unsplash.com/photo-1724582586413-6b69e1c94a17?w=700&auto=format&fit=crop&q=75" alt="Schlafzimmer mit Doppelbett" loading="lazy">
-          <img src="https://images.unsplash.com/photo-1750845371689-cefc272f0944?w=700&auto=format&fit=crop&q=75" alt="See mit Bergen an einem sonnigen Tag" loading="lazy">
+          <img src="img/haus.jpg" alt="Haus am Seeufer mit Holzbalkon und Steg" width="1536" height="1024" loading="lazy">
+          <img src="img/wohnzimmer.jpg" alt="Wohnzimmer mit Blick auf See und Berge" width="1536" height="1024" loading="lazy">
+          <img src="img/schlafzimmer.jpg" alt="Schlafzimmer mit Doppelbett und grossem Fenster zum See" width="1536" height="1024" loading="lazy">
+          <img src="img/see.jpg" alt="Bergsee am Abend mit Segelboot" width="1536" height="1024" loading="lazy">
         </div>
         <p class="hinweis galerie-hinweis">Seitlich wischen für mehr Bilder</p>
       </div>
     </section>
 
-    <!-- ===== Preise: ruhige Liste mit Linien ===== -->
+    <!-- ===== Preise ===== -->
     <section id="preise" class="abschnitt abschnitt-flaeche">
       <div class="container schmal">
         <h2>Preise 2026</h2>
@@ -123,23 +124,128 @@
       </div>
     </section>
 
-    <!-- ===== Kontakt ===== -->
+    <!-- ===== Belegungskalender (wird von app.js gebaut) ===== -->
+    <section id="verfuegbarkeit" class="abschnitt">
+      <div class="container verfuegbarkeit">
+        <div>
+          <h2>Verfügbarkeit</h2>
+          <p>Klicken Sie im Kalender zuerst auf den Anreisetag und dann auf den Abreisetag. Die Daten werden automatisch ins Anfrageformular übernommen.</p>
+          <ul class="legende">
+            <li><span class="legende-farbe frei"></span> frei</li>
+            <li><span class="legende-farbe belegt"></span> belegt</li>
+            <li><span class="legende-farbe gewaehlt"></span> Ihre Auswahl</li>
+          </ul>
+          <p class="auswahl-text" id="auswahl-text">Noch keine Daten gewählt.</p>
+        </div>
+
+        <div class="kalender" id="kalender">
+          <div class="kalender-kopf">
+            <button type="button" class="kalender-pfeil" id="monat-zurueck" aria-label="Vorheriger Monat">&#8249;</button>
+            <h3 id="monat-titel">Monat</h3>
+            <button type="button" class="kalender-pfeil" id="monat-vor" aria-label="Nächster Monat">&#8250;</button>
+          </div>
+          <div class="kalender-wochentage">
+            <span>Mo</span><span>Di</span><span>Mi</span><span>Do</span><span>Fr</span><span>Sa</span><span>So</span>
+          </div>
+          <div class="kalender-tage" id="kalender-tage"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Gästebewertungen (Beispieltexte) ===== -->
+    <section id="bewertungen" class="abschnitt abschnitt-flaeche">
+      <div class="container">
+        <h2>Bewertungen</h2>
+        <p class="beispiel-hinweis">Beispieltexte – Platzhalter für echte Bewertungen von Gästen.</p>
+        <div class="bewertungen">
+          <figure class="bewertung">
+            <div class="sterne" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>«Hier steht später, was Gäste an der Wohnung besonders gefallen hat.»</blockquote>
+            <figcaption>Beispiel-Gast, Sommer</figcaption>
+          </figure>
+          <figure class="bewertung">
+            <div class="sterne" aria-label="4 von 5 Sternen">★★★★<span class="stern-leer">★</span></div>
+            <blockquote>«Hier steht später eine Rückmeldung zur Lage, zum See oder zur Ausstattung.»</blockquote>
+            <figcaption>Beispiel-Gast, Herbst</figcaption>
+          </figure>
+          <figure class="bewertung">
+            <div class="sterne" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>«Hier steht später eine Bewertung einer Familie, die mit Kindern hier war.»</blockquote>
+            <figcaption>Beispiel-Gast, Winter</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Kontakt mit Formular ===== -->
     <section id="kontakt" class="abschnitt">
       <div class="container kontakt">
         <div>
-          <h2>Kontakt</h2>
+          <h2>Anfrage</h2>
           <p>Schreiben Sie uns, wann Sie kommen möchten – wir antworten meistens noch am selben Tag.</p>
+
+          <!-- novalidate: Wir prüfen die Eingaben selbst in app.js -->
+          <form id="anfrage-formular" class="formular" novalidate>
+            <div class="feld">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" autocomplete="name">
+              <p class="fehler" id="fehler-name"></p>
+            </div>
+            <div class="feld">
+              <label for="email">E-Mail</label>
+              <input type="email" id="email" name="email" autocomplete="email">
+              <p class="fehler" id="fehler-email"></p>
+            </div>
+            <div class="feld">
+              <label for="anreise">Anreise</label>
+              <input type="date" id="anreise" name="anreise">
+              <p class="fehler" id="fehler-anreise"></p>
+            </div>
+            <div class="feld">
+              <label for="abreise">Abreise</label>
+              <input type="date" id="abreise" name="abreise">
+              <p class="fehler" id="fehler-abreise"></p>
+            </div>
+            <div class="feld">
+              <label for="personen">Personen</label>
+              <select id="personen" name="personen">
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </div>
+            <div class="feld feld-breit">
+              <label for="nachricht">Nachricht <span class="optional">(optional)</span></label>
+              <textarea id="nachricht" name="nachricht" rows="4"></textarea>
+            </div>
+
+            <!-- Preisberechnung wird von app.js gefüllt -->
+            <p class="preis-vorschau feld-breit" id="preis-vorschau"></p>
+
+            <div class="feld-breit">
+              <button type="submit" class="button">Anfrage senden</button>
+            </div>
+          </form>
+
+          <!-- Bestätigung: zuerst versteckt -->
+          <div class="bestaetigung" id="bestaetigung" hidden>
+            <h3>Vielen Dank!</h3>
+            <p id="bestaetigung-text"></p>
+            <p class="hinweis">Dies ist eine Demo-Webseite: Die Anfrage wurde nicht verschickt.</p>
+            <button type="button" class="button" id="neue-anfrage">Neue Anfrage</button>
+          </div>
+        </div>
+
+        <aside class="kontakt-infos">
+          <h3>Gut zu wissen</h3>
           <dl class="infos">
             <dt>Check-in</dt><dd>ab 15:00 Uhr</dd>
             <dt>Check-out</dt><dd>bis 10:00 Uhr</dd>
+            <dt>Mindestaufenthalt</dt><dd>3 Nächte</dd>
             <dt>Haustiere</dt><dd>auf Anfrage</dd>
           </dl>
-        </div>
-        <div class="anfrage-box">
-          <h3>Anfrage senden</h3>
-          <p>Unverbindlich und kostenlos.</p>
-          <button id="anfrage-button" class="button button-hell">Anfrage senden</button>
-        </div>
+        </aside>
       </div>
     </section>
   </main>
@@ -147,13 +253,7 @@
   <footer>
     <div class="container footer-inhalt">
       <p>&copy; <span id="jahr"></span> Ferienwohnung Seeblick</p>
-      <p class="bildnachweis">
-        Fotos: Unsplash /
-        <a href="https://unsplash.com/photos/mountains-and-a-lake-on-a-bright-sunny-day-idneka5RWlE">Miltiadis Fragkidis</a>,
-        <a href="https://unsplash.com/photos/a-view-of-a-lake-with-a-house-in-the-background-XdYmX7QwtDA">Aravind Sreekumar Nair</a>,
-        <a href="https://unsplash.com/photos/sunlit-living-room-with-cream-sofa-and-wooden-coffee-table-GAy2D33TngI">Kevin Lieder</a>,
-        <a href="https://unsplash.com/photos/a-bedroom-with-a-bed-and-a-table-in-it-qPHpk6G9nik">Prydumano Design</a>
-      </p>
+      <p>Bilder: KI-generiert mit Microsoft Copilot – keine echten Fotos der Wohnung</p>
     </div>
   </footer>
 

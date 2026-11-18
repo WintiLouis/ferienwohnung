@@ -41,7 +41,14 @@ body {
 
 img {
   max-width: 100%;
+  height: auto; /* sonst gilt das height-Attribut aus dem HTML und das Bild wird verzerrt */
   display: block;
+}
+
+/* Elemente mit dem Attribut "hidden" immer verstecken,
+   auch wenn sie sonst display: grid oder flex haben */
+[hidden] {
+  display: none !important;
 }
 
 h1, h2, h3 {
@@ -178,8 +185,8 @@ p {
   align-items: flex-end;         /* Text unten links, wie bei einer Bildunterschrift */
   color: white;
   background-image:
-    linear-gradient(0deg, rgba(10, 40, 41, 0.75) 0%, rgba(10, 40, 41, 0.15) 55%),
-    url("https://images.unsplash.com/photo-1750845371689-cefc272f0944?w=1920&auto=format&fit=crop&q=75");
+    linear-gradient(0deg, rgba(10, 40, 41, 0.75) 0%, rgba(10, 40, 41, 0.1) 55%),
+    url("img/see.jpg");
   background-size: cover;
   background-position: center;
 }
@@ -354,20 +361,283 @@ p {
 }
 
 /* =========================================================
-   11. KONTAKT
+   11. BELEGUNGSKALENDER
+   ========================================================= */
+.verfuegbarkeit {
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.legende {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.95rem;
+}
+
+.legende li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legende-farbe {
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--farbe-linie);
+}
+
+.legende-farbe.frei     { background-color: white; }
+.legende-farbe.belegt   { background-color: #d9dedc; }
+.legende-farbe.gewaehlt { background-color: var(--farbe-akzent); border-color: var(--farbe-akzent); }
+
+.auswahl-text {
+  font-weight: 500;
+  color: var(--farbe-haupt);
+}
+
+.kalender {
+  border: 1px solid var(--farbe-linie);
+  background: white;
+  padding: 1.25rem;
+}
+
+.kalender-kopf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.kalender-kopf h3 {
+  margin: 0;
+}
+
+.kalender-pfeil {
+  width: 40px;
+  height: 40px;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--farbe-haupt);
+  background: none;
+  border: 1px solid var(--farbe-linie);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.kalender-pfeil:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.kalender-wochentage,
+.kalender-tage {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 Spalten = 7 Wochentage */
+  gap: 4px;
+}
+
+.kalender-wochentage span {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--farbe-text-hell);
+  padding-bottom: 0.4rem;
+}
+
+.tag {
+  aspect-ratio: 1 / 1;           /* quadratische Felder */
+  font-family: var(--schrift-text);
+  font-size: 0.95rem;
+  color: var(--farbe-text);
+  background: white;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.tag:hover {
+  border-color: var(--farbe-akzent);
+}
+
+.tag.heute {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.tag.vergangen {
+  color: #b5bfbd;
+  cursor: default;
+}
+
+.tag.vergangen:hover {
+  border-color: transparent;
+}
+
+.tag.belegt {
+  background-color: #d9dedc;
+  color: #7d8a88;
+  text-decoration: line-through;
+}
+
+.tag.im-zeitraum {
+  background-color: var(--farbe-flaeche);
+}
+
+.tag.gewaehlt {
+  background-color: var(--farbe-akzent);
+  color: white;
+}
+
+/* =========================================================
+   12. BEWERTUNGEN
+   ========================================================= */
+.beispiel-hinweis {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: var(--farbe-text-hell);
+  border: 1px dashed var(--farbe-text-hell);
+  padding: 0.3rem 0.7rem;
+  margin-bottom: 2rem;
+}
+
+.bewertungen {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.bewertung {
+  margin: 0;
+  padding-top: 1.25rem;
+  border-top: 2px solid var(--farbe-haupt);
+}
+
+.sterne {
+  color: var(--farbe-akzent);
+  letter-spacing: 0.15em;
+  margin-bottom: 0.75rem;
+}
+
+.stern-leer {
+  color: var(--farbe-linie);
+}
+
+.bewertung blockquote {
+  margin: 0 0 1rem;
+  font-family: var(--schrift-titel);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--farbe-haupt);
+}
+
+.bewertung figcaption {
+  font-size: 0.9rem;
+  color: var(--farbe-text-hell);
+}
+
+/* =========================================================
+   13. KONTAKT UND FORMULAR
    ========================================================= */
 .kontakt {
   display: grid;
-  grid-template-columns: 7fr 5fr;
+  grid-template-columns: 7fr 4fr;
   gap: clamp(2rem, 5vw, 4.5rem);
   align-items: start;
+}
+
+.formular {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* zwei Felder nebeneinander */
+  gap: 1.1rem 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.feld-breit {
+  grid-column: 1 / -1;           /* über die ganze Breite */
+}
+
+.feld label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--farbe-text-hell);
+}
+
+.feld input,
+.feld select,
+.feld textarea {
+  width: 100%;
+  font-family: var(--schrift-text);
+  font-size: 1rem;
+  color: var(--farbe-text);
+  background: white;
+  border: 1px solid var(--farbe-linie);
+  border-radius: var(--radius);
+  padding: 0.7rem 0.8rem;
+}
+
+.feld input:focus,
+.feld select:focus,
+.feld textarea:focus {
+  outline: 2px solid var(--farbe-akzent);
+  outline-offset: 1px;
+  border-color: var(--farbe-akzent);
+}
+
+/* rote Umrandung bei Fehlern (Klasse wird von app.js gesetzt) */
+.feld .ungueltig {
+  border-color: #b3261e;
+}
+
+.fehler {
+  color: #b3261e;
+  font-size: 0.875rem;
+  margin: 0.3rem 0 0;
+  min-height: 0;
+}
+
+.fehler:empty {
+  display: none;
+}
+
+.preis-vorschau {
+  margin: 0;
+  font-weight: 500;
+  color: var(--farbe-haupt);
+}
+
+.preis-vorschau:empty {
+  display: none;
+}
+
+.bestaetigung {
+  margin-top: 1.5rem;
+  padding: 1.75rem;
+  border-left: 4px solid var(--farbe-akzent);
+  background-color: var(--farbe-flaeche);
+}
+
+.kontakt-infos {
+  border-top: 2px solid var(--farbe-haupt);
+  padding-top: 1.25rem;
 }
 
 .infos {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 0.5rem 2rem;
-  margin: 1.5rem 0 0;
+  gap: 0.5rem 1.5rem;
+  margin: 0;
 }
 
 .infos dt {
@@ -379,25 +649,8 @@ p {
   color: var(--farbe-text-hell);
 }
 
-.anfrage-box {
-  background-color: var(--farbe-haupt);
-  color: white;
-  border-radius: var(--radius);
-  padding: clamp(1.75rem, 4vw, 2.5rem);
-}
-
-.anfrage-box h3 {
-  color: white;
-  margin-bottom: 0.5rem;
-}
-
-.anfrage-box p {
-  opacity: 0.85;
-  margin-bottom: 1.5rem;
-}
-
 /* =========================================================
-   12. FUSSZEILE
+   14. FUSSZEILE
    ========================================================= */
 footer {
   border-top: 1px solid var(--farbe-linie);
@@ -422,17 +675,29 @@ footer a {
 }
 
 /* =========================================================
-   13. TABLET (bis 900 px Breite)
+   15. TABLET (bis 900 px Breite)
    ========================================================= */
 @media (max-width: 900px) {
   .wohnung,
-  .kontakt {
+  .kontakt,
+  .verfuegbarkeit {
     grid-template-columns: 1fr;
+  }
+
+  .bewertungen {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  /* Navigation mit 6 Einträgen wird auf dem Tablet zu eng */
+  .navigation {
+    gap: 1.1rem;
+    font-size: 0.95rem;
   }
 }
 
 /* =========================================================
-   14. HANDY (bis 700 px Breite)
+   16. HANDY (bis 700 px Breite)
    ========================================================= */
 @media (max-width: 700px) {
   body {
@@ -481,8 +746,8 @@ footer a {
   .hero {
     min-height: 68vh;
     background-image:
-      linear-gradient(0deg, rgba(10, 40, 41, 0.8) 0%, rgba(10, 40, 41, 0.2) 60%),
-      url("https://images.unsplash.com/photo-1750845371689-cefc272f0944?w=900&auto=format&fit=crop&q=75");
+      linear-gradient(0deg, rgba(10, 40, 41, 0.8) 0%, rgba(10, 40, 41, 0.15) 60%),
+      url("img/see.jpg");
   }
 
   .eckdaten ul {
@@ -527,5 +792,14 @@ footer a {
 
   .galerie-hinweis {
     display: block;
+  }
+
+  /* Formular: alle Felder untereinander */
+  .formular {
+    grid-template-columns: 1fr;
+  }
+
+  .kalender {
+    padding: 0.9rem;
   }
 }
