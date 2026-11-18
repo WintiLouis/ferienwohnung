@@ -1,119 +1,233 @@
-/* ===== Farben als Variablen: hier zentral ändern ===== */
-/* Wenige Farben, ein Akzent – wie bei den grossen Webseiten */
+/* =========================================================
+   1. VARIABLEN – Farben, Schriften, Abstände zentral ändern
+   Palette "Alpensee" ohne Gelbtöne
+   ========================================================= */
 :root {
-  --farbe-see: #1f4e5f;
-  --farbe-hintergrund: #fafaf8;
-  --farbe-akzent: #e08a1e;
-  --farbe-text: #222;
-  --farbe-text-hell: #666;
-  --farbe-linie: #e6e6e1;
-  --radius: 12px;
-  --schatten: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --farbe-haupt: #0f3d3e;        /* dunkles Petrol */
+  --farbe-akzent: #2e8b7a;       /* Seegrün für Buttons */
+  --farbe-akzent-dunkel: #236c5f;
+  --farbe-flaeche: #e8f0ee;      /* helles Salbei für Abschnitte */
+  --farbe-hintergrund: #fbfaf7;  /* warmes Weiss */
+  --farbe-text: #1d2a2b;
+  --farbe-text-hell: #5b6b6c;
+  --farbe-linie: #d6e2df;
+
+  --schrift-titel: "Playfair Display", Georgia, serif;
+  --schrift-text: "Inter", "Segoe UI", Arial, sans-serif;
+
+  --radius: 14px;
+  --schatten: 0 8px 30px rgba(15, 61, 62, 0.10);
+  --abstand-abschnitt: clamp(3.5rem, 8vw, 6rem); /* wächst mit der Bildschirmbreite */
 }
 
-/* ===== Grundeinstellungen ===== */
+/* =========================================================
+   2. GRUNDEINSTELLUNGEN
+   ========================================================= */
 * {
-  box-sizing: border-box; /* Padding zählt zur Breite dazu */
+  box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth; /* weiches Scrollen bei Klick auf Navigation */
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
   margin: 0;
+  font-family: var(--schrift-text);
+  font-size: 1rem;
+  line-height: 1.65;
   color: var(--farbe-text);
   background-color: var(--farbe-hintergrund);
-  line-height: 1.6;
 }
 
-/* ===== Kopfzeile ===== */
-.kopfzeile {
-  position: sticky; /* bleibt oben kleben */
-  top: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1, h2, h3 {
+  font-family: var(--schrift-titel);
+  color: var(--farbe-haupt);
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+
+/* clamp(min, ideal, max): Schrift wächst mit, aber nie zu klein oder zu gross */
+h1 { font-size: clamp(2.2rem, 6vw, 4rem); }
+h2 { font-size: clamp(1.7rem, 3.5vw, 2.5rem); }
+h3 { font-size: 1.2rem; }
+
+p {
+  margin: 0 0 1rem;
+}
+
+/* Container: begrenzt die Breite auf dem Laptop, Rand auf dem Handy */
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* =========================================================
+   3. BUTTONS
+   ========================================================= */
+.button {
+  display: inline-block;
+  background-color: var(--farbe-akzent);
+  color: white;
+  font-family: var(--schrift-text);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  border-radius: 999px;
   padding: 0.9rem 2rem;
-  background-color: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.button:hover {
+  background-color: var(--farbe-akzent-dunkel);
+  transform: translateY(-2px);
+}
+
+.button-klein {
+  padding: 0.55rem 1.3rem;
+  font-size: 0.95rem;
+}
+
+/* =========================================================
+   4. KOPFZEILE
+   ========================================================= */
+.kopfzeile {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(251, 250, 247, 0.95);
+  backdrop-filter: blur(8px); /* Inhalt dahinter leicht verschwommen */
   border-bottom: 1px solid var(--farbe-linie);
 }
 
+.kopfzeile-inhalt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+
 .logo {
-  color: var(--farbe-see);
+  font-family: var(--schrift-titel);
+  font-size: 1.5rem;
   font-weight: 700;
-  font-size: 1.3rem;
-  letter-spacing: 0.02em;
+  color: var(--farbe-haupt);
   text-decoration: none;
 }
 
-nav a {
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navigation a:not(.button) {
   color: var(--farbe-text);
-  margin-left: 1.5rem;
   text-decoration: none;
+  font-weight: 500;
 }
 
-nav a:hover {
+.navigation a:not(.button):hover {
   color: var(--farbe-akzent);
 }
 
-/* ===== Hero: grosses Foto mit dunklem Verlauf, damit der Text lesbar bleibt ===== */
+/* Menü-Button (drei Striche) – auf dem Laptop versteckt */
+.menue-button {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.menue-button span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  margin: 5px 0;
+  background-color: var(--farbe-haupt);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* =========================================================
+   5. HERO
+   ========================================================= */
 .hero {
-  min-height: 75vh; /* 75 % der Fensterhöhe */
+  min-height: 82vh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
   color: white;
-  padding: 4rem 1.5rem;
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.55)),
+    linear-gradient(90deg, rgba(15, 61, 62, 0.85) 0%, rgba(15, 61, 62, 0.35) 60%, rgba(15, 61, 62, 0.1) 100%),
     url("https://images.unsplash.com/photo-1750845371689-cefc272f0944?w=1920&auto=format&fit=crop&q=75");
-  background-size: cover;    /* Bild füllt die ganze Fläche */
+  background-size: cover;
   background-position: center;
 }
 
+.hero-inhalt {
+  padding-top: 4rem;
+  padding-bottom: 6rem;
+}
+
 .hero h1 {
-  font-size: 3rem;
-  margin: 0 0 0.5rem;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  color: white;
+  max-width: 14ch; /* höchstens ca. 14 Zeichen pro Zeile */
 }
 
-.hero p {
-  font-size: 1.25rem;
-  margin: 0 0 2rem;
+.hero-ort {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.9;
 }
 
-/* ===== Fakten auf einen Blick ===== */
+.hero-text {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  max-width: 34rem;
+  margin-bottom: 2rem;
+}
+
+/* =========================================================
+   6. FAKTEN-LEISTE
+   ========================================================= */
 .fakten {
-  max-width: 960px;
-  margin: -3rem auto 0; /* ragt leicht in das Hero-Bild hinein */
+  list-style: none;
+  margin: -3rem 0 0;
+  padding: 0;
   position: relative;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   background: white;
   border-radius: var(--radius);
   box-shadow: var(--schatten);
-  overflow: hidden;
 }
 
-.fakten div {
+.fakten li {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.2rem 0.5rem;
+  padding: 1.4rem 0.5rem;
   border-right: 1px solid var(--farbe-linie);
 }
 
-.fakten div:last-child {
+.fakten li:last-child {
   border-right: none;
 }
 
 .fakten strong {
-  font-size: 1.4rem;
-  color: var(--farbe-see);
+  font-family: var(--schrift-titel);
+  font-size: 1.6rem;
+  color: var(--farbe-haupt);
 }
 
 .fakten span {
@@ -121,70 +235,84 @@ nav a:hover {
   color: var(--farbe-text-hell);
 }
 
-.fakten .fakten-preis {
-  background-color: var(--farbe-see);
+/* =========================================================
+   7. ABSCHNITTE
+   ========================================================= */
+.abschnitt {
+  padding: var(--abstand-abschnitt) 0;
+  scroll-margin-top: 68px; /* Höhe der Kopfzeile */
 }
 
-.fakten .fakten-preis strong,
-.fakten .fakten-preis span {
-  color: white;
+/* Jeder zweite Abschnitt mit farbiger Fläche – so trennt man klar */
+.abschnitt-flaeche {
+  background-color: var(--farbe-flaeche);
 }
 
-/* ===== Inhaltsbereich ===== */
-main {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
+.untertitel {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--farbe-akzent);
+  margin-bottom: 0.5rem;
 }
 
-section {
-  margin-bottom: 4rem;
-  scroll-margin-top: 6rem; /* Abstand, damit die Kopfzeile die Überschrift nicht verdeckt */
-}
-
-h2 {
-  color: var(--farbe-see);
-  font-size: 1.8rem;
-  margin: 0 0 1rem;
-}
-
-.einleitung {
-  font-size: 1.1rem;
+.hinweis {
   color: var(--farbe-text-hell);
-  max-width: 640px;
+  font-size: 0.95rem;
+  margin-top: 1.5rem;
 }
 
-/* ===== Ausstattung mit Linien-Icons ===== */
+/* Zwei Spalten: Text und Bild nebeneinander */
+.zwei-spalten {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.rund-bild {
+  width: 100%;
+  aspect-ratio: 4 / 3; /* festes Seitenverhältnis */
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--schatten);
+}
+
+/* =========================================================
+   8. AUSSTATTUNG
+   ========================================================= */
 .ausstattung {
   list-style: none;
-  padding: 0;
   margin: 2rem 0 0;
+  padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* passt sich der Breite an */
-  gap: 1.5rem 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
 }
 
 .ausstattung li {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
+  background: white;
+  border-radius: var(--radius);
+  padding: 1.5rem;
 }
 
-/* Alle Icons gleich: gleiche Grösse, gleiche Linienstärke, gleiche Farbe */
 .ausstattung svg {
-  flex-shrink: 0;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 0.75rem;
   fill: none;
-  stroke: var(--farbe-see);
+  stroke: var(--farbe-akzent);
   stroke-width: 1.6;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .ausstattung h3 {
-  margin: 0;
+  font-family: var(--schrift-text);
   font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
 }
 
 .ausstattung p {
@@ -192,91 +320,129 @@ h2 {
   color: var(--farbe-text-hell);
 }
 
-/* ===== Bildergalerie ===== */
+/* =========================================================
+   9. GALERIE
+   ========================================================= */
 .galerie {
+  margin-top: 2rem;
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 220px 220px;
-  gap: 0.8rem;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 240px 240px;
+  gap: 1rem;
 }
 
 .galerie img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Bild füllt die Zelle, ohne verzerrt zu werden */
+  object-fit: cover;
   border-radius: var(--radius);
-  transition: transform 0.3s;
 }
 
-.galerie img:hover {
-  transform: scale(1.02);
+.galerie img:first-child {
+  grid-row: span 2; /* erstes Bild gross über zwei Zeilen */
 }
 
-.galerie .gross {
-  grid-row: span 2; /* das grosse Bild geht über zwei Zeilen */
+.galerie img:last-child {
+  grid-column: span 2; /* letztes Bild breit über zwei Spalten */
 }
 
-/* ===== Preistabelle ===== */
-.preistabelle {
-  width: 100%;
-  border-collapse: collapse;
+.galerie-hinweis {
+  display: none; /* nur auf dem Handy sichtbar */
+}
+
+/* =========================================================
+   10. PREISE
+   ========================================================= */
+.preise {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.preis-karte {
   background: white;
   border-radius: var(--radius);
-  overflow: hidden; /* damit die runden Ecken sichtbar sind */
-  box-shadow: var(--schatten);
+  padding: 2rem;
+  border: 2px solid transparent;
 }
 
-.preistabelle th,
-.preistabelle td {
-  padding: 0.9rem 1.2rem;
-  text-align: left;
-  border-bottom: 1px solid var(--farbe-linie);
+.preis-karte-hervorgehoben {
+  border-color: var(--farbe-akzent);
 }
 
-.preistabelle th {
-  background-color: var(--farbe-see);
-  color: white;
-  font-weight: 600;
+.preis-karte h3 {
+  margin-bottom: 0.25rem;
 }
 
-.hinweis {
+.zeitraum {
   color: var(--farbe-text-hell);
-  font-size: 0.95rem;
 }
 
-/* ===== Kontakt ===== */
+.preis {
+  font-family: var(--schrift-titel);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--farbe-haupt);
+  margin: 0;
+}
+
+.preis span {
+  font-family: var(--schrift-text);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--farbe-text-hell);
+}
+
+/* =========================================================
+   11. KONTAKT
+   ========================================================= */
 .kontakt {
-  background: white;
-  border-radius: var(--radius);
-  box-shadow: var(--schatten);
-  padding: 2.5rem 2rem;
-  text-align: center;
+  align-items: start;
 }
 
-/* ===== Button: die einzige Stelle mit Akzentfarbe ===== */
-.button {
-  background-color: var(--farbe-akzent);
-  color: white;
-  border: none;
-  border-radius: 999px; /* ganz runde Enden */
-  padding: 0.9rem 2.2rem;
-  font-size: 1.05rem;
+/* Definitionsliste als zweispaltige Tabelle */
+.infos {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem 2rem;
+  margin: 1.5rem 0 0;
+}
+
+.infos dt {
   font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
 }
 
-.button:hover {
-  background-color: #c4740f;
-  transform: translateY(-2px);
+.infos dd {
+  margin: 0;
+  color: var(--farbe-text-hell);
 }
 
-/* ===== Fusszeile ===== */
-footer {
-  text-align: center;
-  padding: 2rem 1rem;
-  background-color: var(--farbe-see);
+.anfrage-box {
+  background-color: var(--farbe-haupt);
   color: white;
+  border-radius: var(--radius);
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.anfrage-box h3 {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.anfrage-box p {
+  opacity: 0.85;
+  margin-bottom: 1.5rem;
+}
+
+/* =========================================================
+   12. FUSSZEILE
+   ========================================================= */
+footer {
+  background-color: var(--farbe-haupt);
+  color: white;
+  text-align: center;
+  padding: 2rem 0;
 }
 
 footer p {
@@ -285,55 +451,108 @@ footer p {
 
 .bildnachweis {
   font-size: 0.85rem;
-  opacity: 0.8;
+  opacity: 0.75;
 }
 
 .bildnachweis a {
   color: white;
 }
 
-/* ===== Tablet: Fakten in zwei Reihen ===== */
-@media (max-width: 800px) {
+/* =========================================================
+   13. TABLET (bis 900 px Breite)
+   ========================================================= */
+@media (max-width: 900px) {
+  .ausstattung {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .fakten {
     grid-template-columns: repeat(2, 1fr);
-    margin: -2rem 1rem 0;
   }
 
-  .fakten div {
+  .fakten li:nth-child(2) {
+    border-right: none;
+  }
+
+  .fakten li:nth-child(-n+2) {
     border-bottom: 1px solid var(--farbe-linie);
-  }
-
-  .fakten .fakten-preis {
-    grid-column: span 2; /* Preis über die ganze Breite */
   }
 }
 
-/* ===== Handy: alles untereinander ===== */
-@media (max-width: 600px) {
-  .kopfzeile {
-    flex-direction: column;
-    gap: 0.4rem;
-    padding: 0.7rem 1rem;
+/* =========================================================
+   14. HANDY (bis 700 px Breite)
+   ========================================================= */
+@media (max-width: 700px) {
+  /* Menü-Button zeigen, Navigation als aufklappbares Menü */
+  .menue-button {
+    display: block;
   }
 
-  nav a {
-    margin: 0 0.6rem;
+  .navigation {
+    display: none;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.5rem 1.25rem 1.25rem;
+    background-color: var(--farbe-hintergrund);
+    border-bottom: 1px solid var(--farbe-linie);
+    box-shadow: var(--schatten);
   }
+
+  .navigation a:not(.button) {
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--farbe-linie);
+  }
+
+  .navigation .button {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  /* Klasse "offen" wird von app.js gesetzt */
+  .navigation.offen {
+    display: flex;
+  }
+
+  /* Drei Striche werden zu einem X */
+  .menue-button[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menue-button[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .menue-button[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
   .hero {
-    min-height: 60vh;
+    min-height: 70vh;
+    background-image:
+      linear-gradient(180deg, rgba(15, 61, 62, 0.35) 0%, rgba(15, 61, 62, 0.85) 100%),
+      url("https://images.unsplash.com/photo-1750845371689-cefc272f0944?w=900&auto=format&fit=crop&q=75");
   }
 
-  .hero h1 {
-    font-size: 2rem;
-  }
-
-  .galerie {
+  .zwei-spalten,
+  .ausstattung,
+  .preise {
     grid-template-columns: 1fr;
-    grid-template-rows: 240px 180px 180px;
   }
 
-  .galerie .gross {
-    grid-row: auto;
+  /* Galerie: seitlich wischen statt Raster */
+  .galerie {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory; /* rastet bei jedem Bild ein */
+    gap: 0.75rem;
+    margin-right: -1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .galerie img {
+    flex: 0 0 85%;
+    height: 260px;
+    scroll-snap-align: start;
+  }
+
+  .galerie-hinweis {
+    display: block;
   }
 }
