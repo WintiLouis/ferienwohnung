@@ -1,42 +1,339 @@
-/* Grundeinstellungen für die ganze Seite */
+/* ===== Farben als Variablen: hier zentral ändern ===== */
+/* Wenige Farben, ein Akzent – wie bei den grossen Webseiten */
+:root {
+  --farbe-see: #1f4e5f;
+  --farbe-hintergrund: #fafaf8;
+  --farbe-akzent: #e08a1e;
+  --farbe-text: #222;
+  --farbe-text-hell: #666;
+  --farbe-linie: #e6e6e1;
+  --radius: 12px;
+  --schatten: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Grundeinstellungen ===== */
+* {
+  box-sizing: border-box; /* Padding zählt zur Breite dazu */
+}
+
+html {
+  scroll-behavior: smooth; /* weiches Scrollen bei Klick auf Navigation */
+}
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
   margin: 0;
-  color: #333;
+  color: var(--farbe-text);
+  background-color: var(--farbe-hintergrund);
   line-height: 1.6;
 }
 
-/* Kopfzeile mit Titel und Navigation */
-header {
-  background-color: #1f4e5f;
-  color: white;
-  padding: 1rem 2rem;
+/* ===== Kopfzeile ===== */
+.kopfzeile {
+  position: sticky; /* bleibt oben kleben */
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 2rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid var(--farbe-linie);
 }
 
-nav a {
-  color: white;
-  margin-right: 1rem;
+.logo {
+  color: var(--farbe-see);
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0.02em;
   text-decoration: none;
 }
 
-/* Inhaltsbereich */
-main {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1rem 2rem;
+nav a {
+  color: var(--farbe-text);
+  margin-left: 1.5rem;
+  text-decoration: none;
 }
 
-button {
-  background-color: #1f4e5f;
+nav a:hover {
+  color: var(--farbe-akzent);
+}
+
+/* ===== Hero: grosses Foto mit dunklem Verlauf, damit der Text lesbar bleibt ===== */
+.hero {
+  min-height: 75vh; /* 75 % der Fensterhöhe */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 4rem 1.5rem;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.55)),
+    url("https://images.unsplash.com/photo-1750845371689-cefc272f0944?w=1920&auto=format&fit=crop&q=75");
+  background-size: cover;    /* Bild füllt die ganze Fläche */
+  background-position: center;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin: 0 0 0.5rem;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.hero p {
+  font-size: 1.25rem;
+  margin: 0 0 2rem;
+}
+
+/* ===== Fakten auf einen Blick ===== */
+.fakten {
+  max-width: 960px;
+  margin: -3rem auto 0; /* ragt leicht in das Hero-Bild hinein */
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--schatten);
+  overflow: hidden;
+}
+
+.fakten div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.2rem 0.5rem;
+  border-right: 1px solid var(--farbe-linie);
+}
+
+.fakten div:last-child {
+  border-right: none;
+}
+
+.fakten strong {
+  font-size: 1.4rem;
+  color: var(--farbe-see);
+}
+
+.fakten span {
+  font-size: 0.9rem;
+  color: var(--farbe-text-hell);
+}
+
+.fakten .fakten-preis {
+  background-color: var(--farbe-see);
+}
+
+.fakten .fakten-preis strong,
+.fakten .fakten-preis span {
+  color: white;
+}
+
+/* ===== Inhaltsbereich ===== */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+section {
+  margin-bottom: 4rem;
+  scroll-margin-top: 6rem; /* Abstand, damit die Kopfzeile die Überschrift nicht verdeckt */
+}
+
+h2 {
+  color: var(--farbe-see);
+  font-size: 1.8rem;
+  margin: 0 0 1rem;
+}
+
+.einleitung {
+  font-size: 1.1rem;
+  color: var(--farbe-text-hell);
+  max-width: 640px;
+}
+
+/* ===== Ausstattung mit Linien-Icons ===== */
+.ausstattung {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* passt sich der Breite an */
+  gap: 1.5rem 2rem;
+}
+
+.ausstattung li {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+/* Alle Icons gleich: gleiche Grösse, gleiche Linienstärke, gleiche Farbe */
+.ausstattung svg {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: var(--farbe-see);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ausstattung h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.ausstattung p {
+  margin: 0;
+  color: var(--farbe-text-hell);
+}
+
+/* ===== Bildergalerie ===== */
+.galerie {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 220px 220px;
+  gap: 0.8rem;
+}
+
+.galerie img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Bild füllt die Zelle, ohne verzerrt zu werden */
+  border-radius: var(--radius);
+  transition: transform 0.3s;
+}
+
+.galerie img:hover {
+  transform: scale(1.02);
+}
+
+.galerie .gross {
+  grid-row: span 2; /* das grosse Bild geht über zwei Zeilen */
+}
+
+/* ===== Preistabelle ===== */
+.preistabelle {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden; /* damit die runden Ecken sichtbar sind */
+  box-shadow: var(--schatten);
+}
+
+.preistabelle th,
+.preistabelle td {
+  padding: 0.9rem 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid var(--farbe-linie);
+}
+
+.preistabelle th {
+  background-color: var(--farbe-see);
+  color: white;
+  font-weight: 600;
+}
+
+.hinweis {
+  color: var(--farbe-text-hell);
+  font-size: 0.95rem;
+}
+
+/* ===== Kontakt ===== */
+.kontakt {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--schatten);
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+/* ===== Button: die einzige Stelle mit Akzentfarbe ===== */
+.button {
+  background-color: var(--farbe-akzent);
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
+  border-radius: 999px; /* ganz runde Enden */
+  padding: 0.9rem 2.2rem;
+  font-size: 1.05rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
 }
 
-/* Fusszeile */
+.button:hover {
+  background-color: #c4740f;
+  transform: translateY(-2px);
+}
+
+/* ===== Fusszeile ===== */
 footer {
   text-align: center;
-  padding: 1rem;
-  background-color: #eee;
+  padding: 2rem 1rem;
+  background-color: var(--farbe-see);
+  color: white;
+}
+
+footer p {
+  margin: 0.3rem 0;
+}
+
+.bildnachweis {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.bildnachweis a {
+  color: white;
+}
+
+/* ===== Tablet: Fakten in zwei Reihen ===== */
+@media (max-width: 800px) {
+  .fakten {
+    grid-template-columns: repeat(2, 1fr);
+    margin: -2rem 1rem 0;
+  }
+
+  .fakten div {
+    border-bottom: 1px solid var(--farbe-linie);
+  }
+
+  .fakten .fakten-preis {
+    grid-column: span 2; /* Preis über die ganze Breite */
+  }
+}
+
+/* ===== Handy: alles untereinander ===== */
+@media (max-width: 600px) {
+  .kopfzeile {
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.7rem 1rem;
+  }
+
+  nav a {
+    margin: 0 0.6rem;
+  }
+
+  .hero {
+    min-height: 60vh;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .galerie {
+    grid-template-columns: 1fr;
+    grid-template-rows: 240px 180px 180px;
+  }
+
+  .galerie .gross {
+    grid-row: auto;
+  }
 }
