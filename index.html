@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ferienwohnung Seeblick</title>
-  <!-- Schriften von Google Fonts: Playfair Display (Titel) und Inter (Text) -->
+  <!-- Schriften von Google Fonts: Libre Caslon Text (Titel) und Work Sans (Text) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- ===== Kopfzeile: Logo | Navigation | Button ===== -->
+  <!-- ===== Kopfzeile ===== -->
   <header class="kopfzeile">
     <div class="container kopfzeile-inhalt">
       <a href="#" class="logo">Seeblick</a>
@@ -31,69 +31,67 @@
     </div>
   </header>
 
-  <!-- ===== Hero: grosses Foto, eine Hauptaktion ===== -->
+  <!-- ===== Hero ===== -->
   <section class="hero">
     <div class="container hero-inhalt">
-      <p class="hero-ort">Ferienwohnung am See</p>
-      <h1>Aufwachen mit Blick auf den See</h1>
-      <p class="hero-text">Helle 3-Zimmer-Wohnung mit Balkon, nur zwei Minuten vom Ufer entfernt.</p>
+      <h1>Ferienwohnung Seeblick</h1>
+      <p class="hero-text">Drei Zimmer, ein Balkon und der See direkt vor dem Fenster.</p>
       <a href="#kontakt" class="button">Verfügbarkeit anfragen</a>
     </div>
   </section>
 
-  <!-- ===== Fakten auf einen Blick ===== -->
-  <div class="container">
-    <ul class="fakten">
-      <li><strong>4</strong><span>Personen</span></li>
-      <li><strong>3</strong><span>Zimmer</span></li>
-      <li><strong>75 m²</strong><span>Wohnfläche</span></li>
-      <li><strong>2 Min.</strong><span>zum See</span></li>
+  <!-- ===== Eckdaten: eine schlichte Zeile unter dem Foto ===== -->
+  <div class="eckdaten">
+    <ul class="container">
+      <li><strong>4</strong> Personen</li>
+      <li><strong>3</strong> Zimmer</li>
+      <li><strong>75 m²</strong> Wohnfläche</li>
+      <li><strong>2 Min.</strong> zum See</li>
+      <li>ab <strong>CHF 120.–</strong> pro Nacht</li>
     </ul>
   </div>
 
   <main>
-    <!-- ===== Die Wohnung: Text links, Bild rechts (auf dem Handy untereinander) ===== -->
+    <!-- ===== Die Wohnung: schmaler Text, grösseres Bild ===== -->
     <section id="wohnung" class="abschnitt">
-      <div class="container zwei-spalten">
-        <div>
-          <p class="untertitel">Die Wohnung</p>
-          <h2>Ruhe, Licht und Seeblick</h2>
-          <p>Die Wohnung liegt im obersten Stock eines kleinen Hauses direkt am See. Grosse Fenster und der Balkon lassen viel Licht herein – vom Wohnzimmer aus sehen Sie auf das Wasser und die Berge.</p>
-          <p>Ideal für Familien oder zwei Paare, die Erholung in der Natur suchen.</p>
+      <div class="container wohnung">
+        <div class="wohnung-text">
+          <h2>Die Wohnung</h2>
+          <p>Unsere Wohnung liegt im obersten Stock eines kleinen Hauses am Seeufer. Morgens scheint die Sonne ins Wohnzimmer, abends sitzt man auf dem Balkon und schaut zu, wie die Berge im Wasser dunkler werden.</p>
+          <p>Platz ist für vier Personen. Familien mit Kindern sind genauso willkommen wie zwei befreundete Paare.</p>
         </div>
-        <img class="rund-bild" src="https://images.unsplash.com/photo-1783110688453-4bf5d4c87a61?w=900&auto=format&fit=crop&q=75" alt="Helles Wohnzimmer mit Sofa und Holztisch" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1783110688453-4bf5d4c87a61?w=1000&auto=format&fit=crop&q=75" alt="Helles Wohnzimmer mit Sofa und Holztisch" loading="lazy">
       </div>
     </section>
 
-    <!-- ===== Ausstattung: 3 / 2 / 1 Spalten je nach Bildschirm ===== -->
+    <!-- ===== Ausstattung: einfache Liste mit Trennlinien ===== -->
     <section class="abschnitt abschnitt-flaeche">
       <div class="container">
-        <p class="untertitel">Ausstattung</p>
-        <h2>Alles, was Sie brauchen</h2>
+        <h2>Ausstattung</h2>
         <ul class="ausstattung">
           <li>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18V6"/><path d="M3 14h18v4"/><path d="M21 14v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="11" r="2"/></svg>
-            <h3>2 Schlafzimmer</h3><p>Ein Doppelbett und zwei Einzelbetten</p>
+            <div><strong>2 Schlafzimmer</strong> – ein Doppelbett, zwei Einzelbetten</div>
           </li>
           <li>
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-            <h3>Balkon</h3><p>Mit freier Sicht auf den See</p>
+            <div><strong>Balkon</strong> – mit Blick über den See</div>
           </li>
           <li>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v20"/><path d="M4 2v6a3 3 0 0 0 6 0V2"/><path d="M17 22V2c-2 1-3 4-3 7s1 4 3 4"/></svg>
-            <h3>Küche</h3><p>Voll ausgestattet mit Geschirrspüler</p>
+            <div><strong>Küche</strong> – Backofen, Geschirrspüler, Kaffeemaschine</div>
           </li>
           <li>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M1.5 9a16 16 0 0 1 21 0"/><path d="M8.5 16a6 6 0 0 1 7 0"/><circle cx="12" cy="20" r="0.5"/></svg>
-            <h3>WLAN</h3><p>Schnelles Internet inklusive</p>
+            <div><strong>WLAN</strong> – inklusive</div>
           </li>
           <li>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13l2-6h14l2 6v5H3z"/><path d="M3 13h18"/><circle cx="7.5" cy="16" r="1"/><circle cx="16.5" cy="16" r="1"/></svg>
-            <h3>Parkplatz</h3><p>Direkt vor dem Haus</p>
+            <div><strong>Parkplatz</strong> – direkt vor dem Haus</div>
           </li>
           <li>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8c2 0 2-2 5-2s3 2 5 2 2-2 5-2 3 2 5 2"/><path d="M2 14c2 0 2-2 5-2s3 2 5 2 2-2 5-2 3 2 5 2"/><path d="M2 20c2 0 2-2 5-2s3 2 5 2 2-2 5-2 3 2 5 2"/></svg>
-            <h3>Seezugang</h3><p>Nur 2 Minuten zu Fuss</p>
+            <div><strong>Seezugang</strong> – zwei Minuten zu Fuss</div>
           </li>
         </ul>
       </div>
@@ -102,65 +100,55 @@
     <!-- ===== Galerie: Raster auf dem Laptop, Wischen auf dem Handy ===== -->
     <section id="galerie" class="abschnitt">
       <div class="container">
-        <p class="untertitel">Bilder</p>
-        <h2>Ein erster Eindruck</h2>
+        <h2>Bilder</h2>
         <div class="galerie">
           <img src="https://images.unsplash.com/photo-1693647427853-c6ae52add38a?w=1000&auto=format&fit=crop&q=75" alt="Haus am Seeufer mit Bergen im Hintergrund" loading="lazy">
           <img src="https://images.unsplash.com/photo-1783110688453-4bf5d4c87a61?w=700&auto=format&fit=crop&q=75" alt="Helles Wohnzimmer mit Sofa und Holztisch" loading="lazy">
           <img src="https://images.unsplash.com/photo-1724582586413-6b69e1c94a17?w=700&auto=format&fit=crop&q=75" alt="Schlafzimmer mit Doppelbett" loading="lazy">
           <img src="https://images.unsplash.com/photo-1750845371689-cefc272f0944?w=700&auto=format&fit=crop&q=75" alt="See mit Bergen an einem sonnigen Tag" loading="lazy">
         </div>
-        <p class="hinweis galerie-hinweis">Zum Durchblättern seitlich wischen</p>
+        <p class="hinweis galerie-hinweis">Seitlich wischen für mehr Bilder</p>
       </div>
     </section>
 
-    <!-- ===== Preise: zwei Karten nebeneinander ===== -->
+    <!-- ===== Preise: ruhige Liste mit Linien ===== -->
     <section id="preise" class="abschnitt abschnitt-flaeche">
-      <div class="container">
-        <p class="untertitel">Preise</p>
-        <h2>Transparent und fair</h2>
-        <div class="preise">
-          <div class="preis-karte">
-            <h3>Nebensaison</h3>
-            <p class="zeitraum">Oktober – April</p>
-            <p class="preis">CHF 120.–<span> / Nacht</span></p>
-          </div>
-          <div class="preis-karte preis-karte-hervorgehoben">
-            <h3>Hauptsaison</h3>
-            <p class="zeitraum">Mai – September</p>
-            <p class="preis">CHF 160.–<span> / Nacht</span></p>
-          </div>
-        </div>
-        <p class="hinweis">Mindestaufenthalt 3 Nächte · Endreinigung CHF 80.– · Bettwäsche und Handtücher inklusive</p>
+      <div class="container schmal">
+        <h2>Preise 2026</h2>
+        <ul class="preisliste">
+          <li><span class="saison">Nebensaison</span><span class="zeitraum">Oktober – April</span><span class="preis">CHF 120.–</span></li>
+          <li><span class="saison">Hauptsaison</span><span class="zeitraum">Mai – September</span><span class="preis">CHF 160.–</span></li>
+        </ul>
+        <p class="hinweis">Preise pro Nacht für die ganze Wohnung. Mindestens 3 Nächte, Endreinigung CHF 80.–. Bettwäsche und Handtücher sind inklusive.</p>
       </div>
     </section>
 
-    <!-- ===== Kontakt: Infos links, Anfrage rechts ===== -->
+    <!-- ===== Kontakt ===== -->
     <section id="kontakt" class="abschnitt">
-      <div class="container zwei-spalten kontakt">
+      <div class="container kontakt">
         <div>
-          <p class="untertitel">Kontakt</p>
-          <h2>Wir freuen uns auf Sie</h2>
+          <h2>Kontakt</h2>
+          <p>Schreiben Sie uns, wann Sie kommen möchten – wir antworten meistens noch am selben Tag.</p>
           <dl class="infos">
             <dt>Check-in</dt><dd>ab 15:00 Uhr</dd>
             <dt>Check-out</dt><dd>bis 10:00 Uhr</dd>
-            <dt>Antwortzeit</dt><dd>innert 24 Stunden</dd>
+            <dt>Haustiere</dt><dd>auf Anfrage</dd>
           </dl>
         </div>
         <div class="anfrage-box">
-          <h3>Unverbindlich anfragen</h3>
-          <p>Teilen Sie uns Ihre Wunschdaten mit – wir prüfen die Verfügbarkeit.</p>
-          <button id="anfrage-button" class="button">Anfrage senden</button>
+          <h3>Anfrage senden</h3>
+          <p>Unverbindlich und kostenlos.</p>
+          <button id="anfrage-button" class="button button-hell">Anfrage senden</button>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container">
+    <div class="container footer-inhalt">
       <p>&copy; <span id="jahr"></span> Ferienwohnung Seeblick</p>
       <p class="bildnachweis">
-        Fotos von Unsplash:
+        Fotos: Unsplash /
         <a href="https://unsplash.com/photos/mountains-and-a-lake-on-a-bright-sunny-day-idneka5RWlE">Miltiadis Fragkidis</a>,
         <a href="https://unsplash.com/photos/a-view-of-a-lake-with-a-house-in-the-background-XdYmX7QwtDA">Aravind Sreekumar Nair</a>,
         <a href="https://unsplash.com/photos/sunlit-living-room-with-cream-sofa-and-wooden-coffee-table-GAy2D33TngI">Kevin Lieder</a>,
