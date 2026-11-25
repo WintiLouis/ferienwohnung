@@ -327,6 +327,11 @@ p {
   display: none;                 /* nur auf dem Handy sichtbar */
 }
 
+/* Link zur Galerie-Seite unter den Bildern */
+.galerie-link {
+  margin: 1.75rem 0 0;
+}
+
 /* =========================================================
    10. PREISE – Liste mit Linien
    ========================================================= */

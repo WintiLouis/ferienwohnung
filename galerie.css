@@ -1,0 +1,850 @@
+/* =========================================================
+   GALERIE-SEITE – ergänzt styles.css
+   Farben und Schriften kommen aus den Variablen in styles.css
+   ========================================================= */
+
+/* aktiver Menüpunkt */
+.navigation a.aktiv {
+  color: var(--farbe-haupt);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+/* sichtbarer Rahmen bei Bedienung mit der Tastatur */
+main button:focus-visible,
+main a:focus-visible,
+.lightbox button:focus-visible {
+  outline: 2px solid var(--farbe-akzent);
+  outline-offset: 3px;
+}
+
+.abschnitt-einleitung {
+  max-width: 40rem;
+  color: var(--farbe-text-hell);
+  margin-bottom: 2rem;
+}
+
+.zaehler {
+  font-family: var(--schrift-titel);
+  font-style: italic;
+  color: var(--farbe-text-hell);
+  white-space: nowrap;
+}
+
+/* =========================================================
+   SEITENKOPF
+   ========================================================= */
+.galerie-kopf {
+  padding: clamp(2.5rem, 6vw, 4.5rem) 0 0;
+}
+
+.galerie-kopf h1 {
+  margin-bottom: 1rem;
+}
+
+.einleitung {
+  max-width: 38rem;
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  color: var(--farbe-text-hell);
+}
+
+.sprungmarken {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sprungmarken a {
+  display: inline-block;
+  padding: 0.35rem 0.95rem;
+  font-size: 0.95rem;
+  color: var(--farbe-haupt);
+  text-decoration: none;
+  border: 1px solid var(--farbe-linie);
+  border-radius: 999px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.sprungmarken a:hover {
+  background-color: var(--farbe-flaeche);
+  border-color: var(--farbe-akzent);
+}
+
+/* =========================================================
+   PFEIL-KNÖPFE (für Diashow, Rundgang, Karussell, Lightbox)
+   ========================================================= */
+.pfeil {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0 0 4px;              /* Pfeilzeichen sitzt sonst zu tief */
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--farbe-haupt);
+  background-color: white;
+  border: 1px solid var(--farbe-linie);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pfeil:hover {
+  background-color: var(--farbe-flaeche);
+}
+
+/* Pfeile, die auf einem Bild liegen */
+.pfeil-ueberbild {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  border: none;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.pfeil-ueberbild.links  { left: 1rem; }
+.pfeil-ueberbild.rechts { right: 1rem; }
+
+/* =========================================================
+   1. DIASHOW
+   ========================================================= */
+.diashow {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background-color: var(--farbe-haupt);
+  border-radius: var(--radius);
+}
+
+.diashow-bilder {
+  position: absolute;
+  inset: 0;
+}
+
+/* alle Bilder liegen übereinander, nur das aktive ist sichtbar */
+.dia {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.dia.aktiv {
+  opacity: 1;
+}
+
+/* langsamer Zoom ("Ken-Burns-Effekt") */
+.dia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 8s ease-out;
+}
+
+.dia.aktiv img {
+  transform: scale(1.1);
+}
+
+/* Bildtext gleitet von unten herein */
+.dia figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 5rem clamp(1.25rem, 4vw, 2.5rem) 4.25rem;
+  color: white;
+  background: linear-gradient(0deg, rgba(10, 40, 41, 0.85) 0%, rgba(10, 40, 41, 0) 100%);
+  opacity: 0;
+  transform: translateY(1rem);
+  transition: opacity 0.8s 0.4s, transform 0.8s 0.4s;
+}
+
+.dia.aktiv figcaption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dia figcaption strong {
+  display: block;
+  font-family: var(--schrift-titel);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+  line-height: 1.2;
+  margin-bottom: 0.3rem;
+}
+
+/* Leiste unten links: Pause-Knopf und Punkte */
+.diashow-leiste {
+  position: absolute;
+  left: clamp(1.25rem, 4vw, 2.5rem);
+  bottom: 1.25rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.diashow-pause {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  background: none;
+  border: 1.5px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.diashow-pause svg {
+  width: 14px;
+  height: 14px;
+  fill: white;
+}
+
+/* je nach Zustand das passende Symbol zeigen */
+.symbol-abspielen,
+.diashow.pausiert .symbol-pause {
+  display: none;
+}
+
+.diashow.pausiert .symbol-abspielen {
+  display: block;
+}
+
+.diashow-punkte {
+  display: flex;
+}
+
+/* grosse Klickfläche, kleiner sichtbarer Punkt */
+.punkt {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.punkt::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid white;
+  border-radius: 50%;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.punkt.aktiv::before {
+  background-color: white;
+  transform: scale(1.25);
+}
+
+/* Fortschrittsbalken ganz unten */
+.diashow-fortschritt {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.diashow-fortschritt span {
+  display: block;
+  height: 100%;
+  background-color: white;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* 6s = so lange bleibt ein Bild stehen */
+.diashow-fortschritt span.laeuft {
+  animation: fortschritt 6s linear forwards;
+}
+
+.diashow:hover .diashow-fortschritt span,
+.diashow.pausiert .diashow-fortschritt span {
+  animation-play-state: paused;
+}
+
+@keyframes fortschritt {
+  to { transform: scaleX(1); }
+}
+
+/* =========================================================
+   2. RUNDGANG
+   ========================================================= */
+.rundgang {
+  display: grid;
+  grid-template-columns: 8fr 4fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.rundgang-fenster {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: var(--radius);
+  touch-action: pan-y;           /* senkrecht scrollen erlaubt, seitlich wischen wir selbst */
+}
+
+.rundgang-band {
+  display: flex;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.rundgang-band img {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: zoom-in;
+  user-select: none;
+}
+
+.rundgang-seite {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rundgang-seite .zaehler {
+  margin-bottom: 0.4rem;
+}
+
+.rundgang-seite h3 {
+  margin-bottom: 0.5rem;
+}
+
+.vorschau {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.vorschau-bild {
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  opacity: 0.5;
+  outline: 2px solid transparent;
+  outline-offset: 3px;
+  transition: opacity 0.3s, outline-color 0.3s;
+}
+
+.vorschau-bild:hover {
+  opacity: 0.85;
+}
+
+.vorschau-bild.aktiv {
+  opacity: 1;
+  outline-color: var(--farbe-akzent);
+}
+
+.vorschau-bild img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+/* =========================================================
+   3. 3D-KARUSSELL
+   ========================================================= */
+.abschnitt-karussell {
+  overflow: hidden;              /* seitliche Karten nicht über den Rand ragen lassen */
+}
+
+.karussell-buehne {
+  position: relative;
+  aspect-ratio: 2.8 / 1;
+  perspective: 1400px;           /* Abstand des "Auges" – macht den 3D-Effekt */
+}
+
+.karussell-karte {
+  position: absolute;
+  top: 0;
+  left: 22.5%;
+  width: 55%;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  box-shadow: 0 24px 40px -20px rgba(15, 61, 62, 0.55);
+  filter: brightness(0.7);
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.8s, filter 0.8s;
+}
+
+.karussell-karte.aktiv {
+  filter: none;
+  cursor: zoom-in;
+}
+
+.karussell-karte img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.karussell-steuerung {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.karussell-titel {
+  min-width: 12rem;
+  margin: 0;
+  text-align: center;
+  font-family: var(--schrift-titel);
+  font-size: 1.35rem;
+  color: var(--farbe-haupt);
+}
+
+/* =========================================================
+   4. PINNWAND – Sofortbilder mit Klebeband
+   ========================================================= */
+.pinnwand {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem 2rem;
+  padding: 1rem 0;
+}
+
+.sofortbild {
+  position: relative;
+  width: 240px;
+  padding: 12px 12px 0;
+  font: inherit;
+  background-color: white;
+  border: none;
+  cursor: zoom-in;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 14px 28px -14px rgba(15, 61, 62, 0.4);
+  transform: rotate(var(--drehung));
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* jedes Bild etwas anders schräg */
+.sofortbild:nth-child(4n + 1) { --drehung: -4deg; }
+.sofortbild:nth-child(4n + 2) { --drehung: 3deg; }
+.sofortbild:nth-child(4n + 3) { --drehung: -1.5deg; }
+.sofortbild:nth-child(4n + 4) { --drehung: 4.5deg; }
+
+/* Klebeband oben */
+.sofortbild::before {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  width: 84px;
+  height: 24px;
+  margin-left: -42px;
+  background-color: rgba(201, 214, 211, 0.75);
+  transform: rotate(-3deg);
+}
+
+.sofortbild:hover,
+.sofortbild:focus-visible {
+  z-index: 1;
+  transform: rotate(0deg) scale(1.07) translateY(-6px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08), 0 28px 44px -18px rgba(15, 61, 62, 0.5);
+}
+
+.sofortbild img {
+  width: 100%;
+  aspect-ratio: 1 / 1;           /* quadratisch wie ein Sofortbild */
+  object-fit: cover;
+}
+
+.sofortbild span {
+  display: block;
+  padding: 0.75rem 0 1rem;
+  font-family: var(--schrift-titel);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--farbe-haupt);
+  text-align: center;
+}
+
+/* =========================================================
+   5. FÄCHER
+   ========================================================= */
+.faecher {
+  display: flex;
+  gap: 6px;
+  height: clamp(320px, 45vw, 480px);
+}
+
+.faecher-teil {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  font: inherit;
+  background-color: var(--farbe-haupt);
+  border: none;
+  border-radius: var(--radius);
+  cursor: zoom-in;
+  transition: flex-grow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faecher-teil img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.6) brightness(0.75);
+  transition: filter 0.6s;
+}
+
+.faecher-text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 3rem 1.5rem 1.25rem;
+  text-align: left;
+  color: white;
+  background: linear-gradient(0deg, rgba(10, 40, 41, 0.85), rgba(10, 40, 41, 0));
+  opacity: 0;
+  transform: translateY(0.75rem);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+.faecher-text strong {
+  display: block;
+  font-family: var(--schrift-titel);
+  font-weight: 400;
+  font-size: 1.5rem;
+  white-space: nowrap;
+}
+
+.faecher-text span {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* aufgeklappt: unter der Maus, mit Tastatur gewählt –
+   oder das erste, solange keines gewählt ist */
+.faecher-teil:hover,
+.faecher-teil:focus-visible,
+.faecher:not(:hover):not(:focus-within) .faecher-teil:first-child {
+  flex-grow: 4;
+}
+
+.faecher-teil:hover img,
+.faecher-teil:focus-visible img,
+.faecher:not(:hover):not(:focus-within) .faecher-teil:first-child img {
+  filter: none;
+}
+
+.faecher-teil:hover .faecher-text,
+.faecher-teil:focus-visible .faecher-text,
+.faecher:not(:hover):not(:focus-within) .faecher-teil:first-child .faecher-text {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.25s;
+}
+
+/* =========================================================
+   6. LAUFBAND
+   ========================================================= */
+.laufband {
+  overflow: hidden;
+  margin-bottom: 12px;
+  /* Bilder am Rand weich ausblenden */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.laufband-spur {
+  display: flex;
+  width: max-content;
+  animation: laufband 60s linear infinite;
+}
+
+.laufband-spur.rueckwaerts {
+  animation-direction: reverse;
+  animation-duration: 75s;
+}
+
+.laufband:hover .laufband-spur {
+  animation-play-state: paused;
+}
+
+/* margin statt gap, damit die Hälfte genau aufgeht */
+.laufband img {
+  width: auto;
+  height: clamp(130px, 18vw, 210px);
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  margin-right: 12px;
+  border-radius: var(--radius);
+}
+
+@keyframes laufband {
+  to { transform: translateX(-50%); }
+}
+
+.galerie-schluss {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  text-align: center;
+}
+
+.galerie-schluss p {
+  font-family: var(--schrift-titel);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  color: var(--farbe-haupt);
+}
+
+/* =========================================================
+   LIGHTBOX (Vollbild)
+   ========================================================= */
+.lightbox {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: clamp(1rem, 4vw, 3rem) clamp(1rem, 7vw, 5rem);
+  color: white;
+  background: transparent;
+  border: none;
+}
+
+.lightbox[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lightbox-ein 0.3s ease;
+}
+
+.lightbox::backdrop {
+  background-color: rgba(10, 30, 31, 0.93);
+}
+
+/* Seite dahinter nicht scrollen, solange die Lightbox offen ist */
+body:has(.lightbox[open]) {
+  overflow: hidden;
+}
+
+.lightbox-inhalt {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0;
+}
+
+.lightbox-inhalt img {
+  width: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 11rem);
+  margin: 0 auto;
+  border-radius: var(--radius);
+}
+
+.lightbox figcaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.lightbox figcaption strong {
+  display: block;
+  font-family: var(--schrift-titel);
+  font-weight: 400;
+  font-size: 1.35rem;
+}
+
+.lightbox figcaption span {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.lightbox .zaehler {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.lightbox .pfeil {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: none;
+}
+
+.lightbox .pfeil:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.lightbox .pfeil.links  { left: 1rem; }
+.lightbox .pfeil.rechts { right: 1rem; }
+
+.lightbox-zu {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  width: 48px;
+  height: 48px;
+  padding: 0 0 4px;
+  font-size: 2rem;
+  line-height: 1;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.lightbox-zu:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+@keyframes lightbox-ein {
+  from { opacity: 0; transform: scale(0.97); }
+}
+
+/* =========================================================
+   TABLET (bis 900 px Breite)
+   ========================================================= */
+@media (max-width: 900px) {
+  .rundgang {
+    grid-template-columns: 1fr;
+  }
+
+  .vorschau {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* =========================================================
+   HANDY (bis 700 px Breite)
+   ========================================================= */
+@media (max-width: 700px) {
+  .pfeil {
+    width: 40px;
+    height: 40px;
+    font-size: 1.6rem;
+  }
+
+  .pfeil-ueberbild.links  { left: 0.5rem; }
+  .pfeil-ueberbild.rechts { right: 0.5rem; }
+
+  .diashow {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* nur der Titel, sonst wird es zu eng */
+  .dia figcaption {
+    padding-bottom: 3.75rem;
+  }
+
+  .dia figcaption span {
+    display: none;
+  }
+
+  .karussell-buehne {
+    aspect-ratio: 2 / 1;
+  }
+
+  .karussell-karte {
+    left: 15%;
+    width: 70%;
+  }
+
+  .karussell-steuerung {
+    gap: 0.75rem;
+  }
+
+  .karussell-titel {
+    min-width: 0;
+    flex: 1;
+    font-size: 1.15rem;
+  }
+
+  .sofortbild {
+    width: calc(50% - 1rem);
+    padding: 8px 8px 0;
+  }
+
+  .sofortbild span {
+    font-size: 0.95rem;
+    padding: 0.5rem 0 0.7rem;
+  }
+
+  /* Fächer klappt senkrecht auf */
+  .faecher {
+    flex-direction: column;
+    height: 560px;
+  }
+
+  .faecher-text {
+    padding: 2rem 1rem 0.9rem;
+  }
+
+  .faecher-text strong {
+    font-size: 1.25rem;
+  }
+
+  .lightbox .pfeil {
+    top: auto;
+    bottom: 1rem;
+    transform: none;
+  }
+
+  .lightbox-inhalt img {
+    max-height: calc(100vh - 13rem);
+  }
+}
+
+/* =========================================================
+   WENIGER BEWEGUNG (Einstellung im Betriebssystem)
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .dia,
+  .dia img,
+  .dia figcaption,
+  .rundgang-band,
+  .karussell-karte,
+  .sofortbild,
+  .faecher-teil,
+  .faecher-teil img,
+  .faecher-text {
+    transition-duration: 0.01s !important;
+  }
+
+  .laufband {
+    overflow-x: auto;
+  }
+
+  .laufband-spur {
+    animation: none;
+  }
+
+  .lightbox[open] {
+    animation: none;
+  }
+}

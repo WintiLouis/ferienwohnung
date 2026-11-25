@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galerie – Ferienwohnung Seeblick</title>
+  <!-- Schriften von Google Fonts: Libre Caslon Text (Titel) und Work Sans (Text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- styles.css = Grundgestaltung (wie Hauptseite), galerie.css = nur für diese Seite -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="galerie.css">
+</head>
+<body>
+  <!-- ===== Kopfzeile (gleich wie auf der Hauptseite, Links zeigen auf index.html) ===== -->
+  <header class="kopfzeile">
+    <div class="container kopfzeile-inhalt">
+      <a href="index.html" class="logo">Seeblick</a>
+
+      <button class="menue-button" id="menue-button" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="navigation" id="navigation">
+        <a href="index.html#wohnung">Wohnung</a>
+        <a href="galerie.html" class="aktiv" aria-current="page">Galerie</a>
+        <a href="index.html#preise">Preise</a>
+        <a href="index.html#verfuegbarkeit">Verfügbarkeit</a>
+        <a href="index.html#bewertungen">Bewertungen</a>
+        <a href="index.html#kontakt" class="button button-klein">Anfragen</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Seitenkopf mit Sprungmarken ===== -->
+    <section class="galerie-kopf">
+      <div class="container">
+        <h1>Galerie</h1>
+        <p class="einleitung">Haus, Wohnung und See – zum Zurücklehnen, Durchklicken und Wischen. Jedes Bild lässt sich mit einem Klick im Vollbild ansehen.</p>
+        <ul class="sprungmarken">
+          <li><a href="#diashow">Diashow</a></li>
+          <li><a href="#rundgang">Rundgang</a></li>
+          <li><a href="#karussell-abschnitt">3D-Karussell</a></li>
+          <li><a href="#pinnwand">Pinnwand</a></li>
+          <li><a href="#faecher">Fächer</a></li>
+          <li><a href="#laufband">Laufband</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== 1. Diashow: wechselt automatisch, mit langsamem Zoom ===== -->
+    <section id="diashow" class="abschnitt">
+      <div class="container">
+        <h2>Diashow</h2>
+        <p class="abschnitt-einleitung">Lehnen Sie sich zurück – die Bilder wechseln von selbst. Solange die Maus über dem Bild ist, hält die Diashow an.</p>
+
+        <div class="diashow" id="diashow-box" aria-roledescription="Karussell" aria-label="Diashow">
+          <!-- Die Bilder werden von galerie.js eingefügt -->
+          <div class="diashow-bilder" id="diashow-bilder"></div>
+
+          <button type="button" class="pfeil pfeil-ueberbild links" id="diashow-zurueck" aria-label="Vorheriges Bild">&#8249;</button>
+          <button type="button" class="pfeil pfeil-ueberbild rechts" id="diashow-vor" aria-label="Nächstes Bild">&#8250;</button>
+
+          <div class="diashow-leiste">
+            <button type="button" class="diashow-pause" id="diashow-pause" aria-label="Diashow anhalten">
+              <svg class="symbol-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+              <svg class="symbol-abspielen" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div class="diashow-punkte" id="diashow-punkte"></div>
+          </div>
+
+          <!-- Fortschrittsbalken: wenn er voll ist, kommt das nächste Bild -->
+          <div class="diashow-fortschritt"><span id="diashow-balken"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 2. Rundgang: grosses Bild mit Vorschaubildern ===== -->
+    <section id="rundgang" class="abschnitt abschnitt-flaeche">
+      <div class="container">
+        <h2>Rundgang</h2>
+        <p class="abschnitt-einleitung">Ein Bild nach dem anderen – mit den Pfeilen, den kleinen Vorschaubildern oder auf dem Handy durch seitliches Wischen.</p>
+
+        <div class="rundgang">
+          <div class="rundgang-fenster" id="rundgang-fenster">
+            <div class="rundgang-band" id="rundgang-band"></div>
+            <button type="button" class="pfeil pfeil-ueberbild links" id="rundgang-zurueck" aria-label="Vorheriges Bild">&#8249;</button>
+            <button type="button" class="pfeil pfeil-ueberbild rechts" id="rundgang-vor" aria-label="Nächstes Bild">&#8250;</button>
+          </div>
+
+          <div class="rundgang-seite">
+            <div aria-live="polite">
+              <p class="zaehler" id="rundgang-zaehler"></p>
+              <h3 id="rundgang-titel"></h3>
+              <p id="rundgang-text"></p>
+            </div>
+            <div class="vorschau" id="rundgang-vorschau"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3. 3D-Karussell: Bilder stehen schräg im Raum ===== -->
+    <section id="karussell-abschnitt" class="abschnitt abschnitt-karussell">
+      <div class="container">
+        <h2>3D-Karussell</h2>
+        <p class="abschnitt-einleitung">Klicken Sie auf ein seitliches Bild, um es nach vorne zu holen. Ein Klick auf das vordere Bild öffnet es gross.</p>
+
+        <div class="karussell-buehne" id="karussell"></div>
+
+        <div class="karussell-steuerung">
+          <button type="button" class="pfeil" id="karussell-zurueck" aria-label="Vorheriges Bild">&#8249;</button>
+          <p class="karussell-titel" id="karussell-titel" aria-live="polite"></p>
+          <button type="button" class="pfeil" id="karussell-vor" aria-label="Nächstes Bild">&#8250;</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4. Pinnwand: Sofortbilder mit Klebeband ===== -->
+    <section id="pinnwand" class="abschnitt abschnitt-flaeche">
+      <div class="container">
+        <h2>Pinnwand</h2>
+        <p class="abschnitt-einleitung">Wie Ferienfotos am Kühlschrank. Fahren Sie mit der Maus darüber.</p>
+        <div class="pinnwand" id="pinnwand-bilder"></div>
+      </div>
+    </section>
+
+    <!-- ===== 5. Fächer: das Bild unter der Maus klappt auf ===== -->
+    <section id="faecher" class="abschnitt">
+      <div class="container">
+        <h2>Fächer</h2>
+        <p class="abschnitt-einleitung">Das Bild unter der Maus klappt auf, die anderen machen Platz.</p>
+        <div class="faecher" id="faecher-bilder"></div>
+      </div>
+    </section>
+
+    <!-- ===== 6. Laufband: zwei Reihen, die endlos vorbeiziehen ===== -->
+    <section id="laufband" class="abschnitt abschnitt-flaeche">
+      <div class="container">
+        <h2>Laufband</h2>
+        <p class="abschnitt-einleitung">Zum Schluss noch einmal alles im Vorbeiziehen.</p>
+      </div>
+      <!-- aria-hidden: reine Dekoration, Screenreader überspringen das Laufband -->
+      <div class="laufband" aria-hidden="true">
+        <div class="laufband-spur"></div>
+      </div>
+      <div class="laufband" aria-hidden="true">
+        <div class="laufband-spur rueckwaerts"></div>
+      </div>
+
+      <div class="container galerie-schluss">
+        <p>Gefällt Ihnen, was Sie sehen?</p>
+        <a href="index.html#verfuegbarkeit" class="button">Freie Daten ansehen</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inhalt">
+      <p>&copy; <span id="jahr"></span> Ferienwohnung Seeblick</p>
+      <p>Bilder: KI-generiert mit Microsoft Copilot – keine echten Fotos der Wohnung</p>
+    </div>
+  </footer>
+
+  <!-- ===== Vollbild-Ansicht (Lightbox) ===== -->
+  <dialog class="lightbox" id="lightbox" aria-label="Bild in voller Grösse">
+    <button type="button" class="lightbox-zu" id="lightbox-zu" aria-label="Schliessen">&times;</button>
+    <button type="button" class="pfeil links" id="lightbox-zurueck" aria-label="Vorheriges Bild">&#8249;</button>
+    <figure class="lightbox-inhalt">
+      <img id="lightbox-bild" alt="" width="1536" height="1024">
+      <figcaption>
+        <div>
+          <strong id="lightbox-titel"></strong>
+          <span id="lightbox-text"></span>
+        </div>
+        <span class="zaehler" id="lightbox-zaehler"></span>
+      </figcaption>
+    </figure>
+    <button type="button" class="pfeil rechts" id="lightbox-vor" aria-label="Nächstes Bild">&#8250;</button>
+  </dialog>
+
+  <script src="galerie.js"></script>
+</body>
+</html>
