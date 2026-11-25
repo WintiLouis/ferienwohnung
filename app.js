@@ -37,9 +37,9 @@ const belegteZeitraeume = [
   { von: "2027-04-03", bis: "2027-04-10" }
 ];
 
-const PREIS_NEBENSAISON = 180;
-const PREIS_HAUPTSAISON = 240;
-const ENDREINIGUNG = 120;
+const PREIS_NEBENSAISON = 360;
+const PREIS_HAUPTSAISON = 480;
+const ENDREINIGUNG = 240;
 const MINDEST_NAECHTE = 3;
 
 
