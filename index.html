@@ -27,7 +27,8 @@
         <a href="#preise">Preise</a>
         <a href="#verfuegbarkeit">Verfügbarkeit</a>
         <a href="#bewertungen">Bewertungen</a>
-        <a href="#kontakt" class="button button-klein">Anfragen</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#buchen" class="button button-klein">Buchen</a>
       </nav>
     </div>
   </header>
@@ -130,7 +131,7 @@
       <div class="container verfuegbarkeit">
         <div>
           <h2>Verfügbarkeit</h2>
-          <p>Klicken Sie im Kalender zuerst auf den Anreisetag und dann auf den Abreisetag. Die Daten werden automatisch ins Anfrageformular übernommen.</p>
+          <p>Klicken Sie im Kalender zuerst auf den Anreisetag und dann auf den Abreisetag. Die Daten werden automatisch ins Buchungsformular übernommen.</p>
           <ul class="legende">
             <li><span class="legende-farbe frei"></span> frei</li>
             <li><span class="legende-farbe belegt"></span> belegt</li>
@@ -153,8 +154,155 @@
       </div>
     </section>
 
+    <!-- ===== Buchung (Prüfung und Zusammenfassung in app.js) ===== -->
+    <section id="buchen" class="abschnitt abschnitt-flaeche">
+      <div class="container buchung">
+        <div>
+          <h2>Buchen</h2>
+          <p>Daten im Kalender wählen oder direkt hier eintragen, Formular ausfüllen – und die Wohnung gehört Ihnen.</p>
+
+          <!-- novalidate: Wir prüfen die Eingaben selbst in app.js -->
+          <form id="buchungs-formular" class="formular" novalidate>
+            <fieldset class="formular-gruppe">
+              <legend>Aufenthalt</legend>
+              <div class="feld">
+                <label for="anreise">Anreise</label>
+                <input type="date" id="anreise" name="anreise">
+                <p class="fehler" id="fehler-anreise"></p>
+              </div>
+              <div class="feld">
+                <label for="abreise">Abreise</label>
+                <input type="date" id="abreise" name="abreise">
+                <p class="fehler" id="fehler-abreise"></p>
+              </div>
+              <div class="feld">
+                <label for="erwachsene">Erwachsene</label>
+                <select id="erwachsene" name="erwachsene">
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+              <div class="feld">
+                <label for="kinder">Kinder <span class="optional">(bis 12 Jahre)</span></label>
+                <select id="kinder" name="kinder">
+                  <option value="0" selected>0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+                <p class="fehler" id="fehler-kinder"></p>
+              </div>
+            </fieldset>
+
+            <fieldset class="formular-gruppe">
+              <legend>Ihre Angaben</legend>
+              <div class="feld">
+                <label for="vorname">Vorname</label>
+                <input type="text" id="vorname" name="vorname" autocomplete="given-name">
+                <p class="fehler" id="fehler-vorname"></p>
+              </div>
+              <div class="feld">
+                <label for="nachname">Nachname</label>
+                <input type="text" id="nachname" name="nachname" autocomplete="family-name">
+                <p class="fehler" id="fehler-nachname"></p>
+              </div>
+              <div class="feld">
+                <label for="email">E-Mail</label>
+                <input type="email" id="email" name="email" autocomplete="email">
+                <p class="fehler" id="fehler-email"></p>
+              </div>
+              <div class="feld">
+                <label for="telefon">Telefon</label>
+                <input type="tel" id="telefon" name="telefon" autocomplete="tel">
+                <p class="fehler" id="fehler-telefon"></p>
+              </div>
+              <div class="feld feld-breit">
+                <label for="strasse">Strasse und Nr.</label>
+                <input type="text" id="strasse" name="strasse" autocomplete="street-address">
+                <p class="fehler" id="fehler-strasse"></p>
+              </div>
+              <div class="feld">
+                <label for="plz">PLZ</label>
+                <input type="text" id="plz" name="plz" inputmode="numeric" autocomplete="postal-code">
+                <p class="fehler" id="fehler-plz"></p>
+              </div>
+              <div class="feld">
+                <label for="ort">Ort</label>
+                <input type="text" id="ort" name="ort" autocomplete="address-level2">
+                <p class="fehler" id="fehler-ort"></p>
+              </div>
+              <div class="feld">
+                <label for="land">Land</label>
+                <select id="land" name="land" autocomplete="country-name">
+                  <option>Schweiz</option>
+                  <option>Deutschland</option>
+                  <option>Österreich</option>
+                  <option>Liechtenstein</option>
+                  <option>Frankreich</option>
+                  <option>Italien</option>
+                  <option>anderes Land</option>
+                </select>
+              </div>
+            </fieldset>
+
+            <fieldset class="formular-gruppe">
+              <legend>Bezahlung</legend>
+              <div class="auswahl-liste feld-breit">
+                <label class="auswahl">
+                  <input type="radio" name="zahlung" value="Rechnung" checked>
+                  <span><strong>Rechnung</strong> Überweisung bis 30 Tage vor der Anreise</span>
+                </label>
+                <label class="auswahl">
+                  <input type="radio" name="zahlung" value="TWINT">
+                  <span><strong>TWINT</strong> Zahlungslink per E-Mail nach der Buchung</span>
+                </label>
+                <label class="auswahl">
+                  <input type="radio" name="zahlung" value="Bar bei Ankunft">
+                  <span><strong>Bar bei Ankunft</strong> bei der Schlüsselübergabe vor Ort</span>
+                </label>
+              </div>
+              <div class="feld feld-breit">
+                <label for="bemerkungen">Bemerkungen <span class="optional">(optional)</span></label>
+                <textarea id="bemerkungen" name="bemerkungen" rows="3" placeholder="z. B. Ankunftszeit, Kinderbett, Haustier"></textarea>
+              </div>
+              <div class="feld-breit">
+                <label class="bestaetigen">
+                  <input type="checkbox" id="bedingungen" name="bedingungen">
+                  <span>Ich habe die Hinweise unter <a href="#kontakt">«Gut zu wissen»</a> gelesen und bin einverstanden.</span>
+                </label>
+                <p class="fehler" id="fehler-bedingungen"></p>
+              </div>
+            </fieldset>
+
+            <div>
+              <button type="submit" class="button">Verbindlich buchen</button>
+            </div>
+          </form>
+
+          <!-- Bestätigung: zuerst versteckt -->
+          <div class="bestaetigung" id="bestaetigung" hidden>
+            <h3>Vielen Dank für Ihre Buchung!</h3>
+            <p>Buchungsnummer: <strong class="buchungsnummer" id="buchungsnummer"></strong></p>
+            <p id="bestaetigung-text"></p>
+            <p class="hinweis">Dies ist eine Demo-Webseite: Es wurde nichts gebucht und keine E-Mail verschickt.</p>
+            <button type="button" class="button" id="neue-buchung">Neue Buchung</button>
+          </div>
+        </div>
+
+        <!-- Zusammenfassung mit Preis, wird von app.js gefüllt -->
+        <aside class="buchung-zusammenfassung" aria-live="polite">
+          <h3>Ihre Buchung</h3>
+          <dl class="zusammenfassung" id="zusammenfassung"></dl>
+          <p class="zusammenfassung-leer" id="zusammenfassung-leer">Wählen Sie im Kalender oder im Formular Ihre Anreise und Abreise.</p>
+          <p class="hinweis">Bettwäsche und Handtücher inklusive. Mindestaufenthalt 3 Nächte.</p>
+        </aside>
+      </div>
+    </section>
+
     <!-- ===== Gästebewertungen (Beispieltexte) ===== -->
-    <section id="bewertungen" class="abschnitt abschnitt-flaeche">
+    <section id="bewertungen" class="abschnitt">
       <div class="container">
         <h2>Bewertungen</h2>
         <p class="beispiel-hinweis">Beispieltexte – Platzhalter für echte Bewertungen von Gästen.</p>
@@ -178,64 +326,21 @@
       </div>
     </section>
 
-    <!-- ===== Kontakt mit Formular ===== -->
-    <section id="kontakt" class="abschnitt">
+    <!-- ===== Kontakt (Beispieldaten) ===== -->
+    <section id="kontakt" class="abschnitt abschnitt-flaeche">
       <div class="container kontakt">
         <div>
-          <h2>Anfrage</h2>
-          <p>Schreiben Sie uns, wann Sie kommen möchten – wir antworten meistens noch am selben Tag.</p>
+          <h2>Kontakt</h2>
+          <p class="beispiel-hinweis">Beispieldaten – Platzhalter für die echten Kontaktangaben.</p>
+          <p>Fragen zur Wohnung, zur Anreise oder zu Haustieren? Rufen Sie an oder schreiben Sie uns – wir antworten meistens noch am selben Tag.</p>
 
-          <!-- novalidate: Wir prüfen die Eingaben selbst in app.js -->
-          <form id="anfrage-formular" class="formular" novalidate>
-            <div class="feld">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" autocomplete="name">
-              <p class="fehler" id="fehler-name"></p>
-            </div>
-            <div class="feld">
-              <label for="email">E-Mail</label>
-              <input type="email" id="email" name="email" autocomplete="email">
-              <p class="fehler" id="fehler-email"></p>
-            </div>
-            <div class="feld">
-              <label for="anreise">Anreise</label>
-              <input type="date" id="anreise" name="anreise">
-              <p class="fehler" id="fehler-anreise"></p>
-            </div>
-            <div class="feld">
-              <label for="abreise">Abreise</label>
-              <input type="date" id="abreise" name="abreise">
-              <p class="fehler" id="fehler-abreise"></p>
-            </div>
-            <div class="feld">
-              <label for="personen">Personen</label>
-              <select id="personen" name="personen">
-                <option value="1">1</option>
-                <option value="2" selected>2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </select>
-            </div>
-            <div class="feld feld-breit">
-              <label for="nachricht">Nachricht <span class="optional">(optional)</span></label>
-              <textarea id="nachricht" name="nachricht" rows="4"></textarea>
-            </div>
-
-            <!-- Preisberechnung wird von app.js gefüllt -->
-            <p class="preis-vorschau feld-breit" id="preis-vorschau"></p>
-
-            <div class="feld-breit">
-              <button type="submit" class="button">Anfrage senden</button>
-            </div>
-          </form>
-
-          <!-- Bestätigung: zuerst versteckt -->
-          <div class="bestaetigung" id="bestaetigung" hidden>
-            <h3>Vielen Dank!</h3>
-            <p id="bestaetigung-text"></p>
-            <p class="hinweis">Dies ist eine Demo-Webseite: Die Anfrage wurde nicht verschickt.</p>
-            <button type="button" class="button" id="neue-anfrage">Neue Anfrage</button>
-          </div>
+          <dl class="infos kontakt-liste">
+            <dt>Gastgeber</dt><dd>Familie Muster</dd>
+            <dt>Adresse</dt><dd>Seeweg 7<br>1234 Musterhausen</dd>
+            <dt>Telefon</dt><dd><a href="tel:+41000000000">+41 00 000 00 00</a></dd>
+            <dt>E-Mail</dt><dd><a href="mailto:info@seeblick.example">info@seeblick.example</a></dd>
+            <dt>Erreichbar</dt><dd>täglich 8 bis 20 Uhr</dd>
+          </dl>
         </div>
 
         <aside class="kontakt-infos">
@@ -244,7 +349,9 @@
             <dt>Check-in</dt><dd>ab 15:00 Uhr</dd>
             <dt>Check-out</dt><dd>bis 10:00 Uhr</dd>
             <dt>Mindestaufenthalt</dt><dd>3 Nächte</dd>
+            <dt>Gäste</dt><dd>höchstens 4 Personen</dd>
             <dt>Haustiere</dt><dd>auf Anfrage</dd>
+            <dt>Stornierung</dt><dd>kostenlos bis 30 Tage vor der Anreise</dd>
           </dl>
         </aside>
       </div>

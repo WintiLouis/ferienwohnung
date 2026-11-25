@@ -226,13 +226,18 @@ kalenderZeichnen();
 
 
 // =========================================================
-// 5. ANFRAGEFORMULAR
+// 5. BUCHUNGSFORMULAR
 // =========================================================
 
-const formular = document.getElementById("anfrage-formular");
+const MAX_GAESTE = 4;
+
+const formular = document.getElementById("buchungs-formular");
 const feldAnreise = document.getElementById("anreise");
 const feldAbreise = document.getElementById("abreise");
-const preisVorschau = document.getElementById("preis-vorschau");
+const feldErwachsene = document.getElementById("erwachsene");
+const feldKinder = document.getElementById("kinder");
+const zusammenfassung = document.getElementById("zusammenfassung");
+const zusammenfassungLeer = document.getElementById("zusammenfassung-leer");
 const bestaetigung = document.getElementById("bestaetigung");
 
 // Im Datumsfeld keine vergangenen Tage erlauben
@@ -243,7 +248,7 @@ feldAbreise.min = zuText(plusTage(heute(), 1));
 function formularAusfuellen() {
   feldAnreise.value = anreise ? zuText(anreise) : "";
   feldAbreise.value = abreise ? zuText(abreise) : "";
-  preisBerechnen();
+  zusammenfassungZeigen();
 }
 
 // Formular -> Kalender (wenn jemand die Daten direkt eintippt)
@@ -255,21 +260,56 @@ function datenAusFormular() {
   }
   auswahlAnzeigen();
   kalenderZeichnen();
-  preisBerechnen();
+  zusammenfassungZeigen();
 }
 
 feldAnreise.addEventListener("change", datenAusFormular);
 feldAbreise.addEventListener("change", datenAusFormular);
+feldErwachsene.addEventListener("change", zusammenfassungZeigen);
+feldKinder.addEventListener("change", zusammenfassungZeigen);
 
-function preisBerechnen() {
-  if (anreise && abreise && abreise > anreise) {
-    const naechte = anzahlNaechte(anreise, abreise);
-    const uebernachtungen = gesamtpreis(anreise, abreise);
-    preisVorschau.textContent = naechte + " Nächte: CHF " + uebernachtungen + ".– + Endreinigung CHF " +
-      ENDREINIGUNG + ".– = CHF " + (uebernachtungen + ENDREINIGUNG) + ".–";
-  } else {
-    preisVorschau.textContent = "";
+// Text wie "2 Erwachsene, 1 Kind"
+function gaesteText() {
+  const erwachsene = Number(feldErwachsene.value);
+  const kinder = Number(feldKinder.value);
+  let text = erwachsene + (erwachsene === 1 ? " erwachsene Person" : " Erwachsene");
+  if (kinder > 0) {
+    text += ", " + kinder + (kinder === 1 ? " Kind" : " Kinder");
   }
+  return text;
+}
+
+// Eine Zeile in der Zusammenfassung: Begriff links, Wert rechts
+function zeileHinzufuegen(begriff, wert, istSumme) {
+  const dt = document.createElement("dt");
+  const dd = document.createElement("dd");
+  dt.textContent = begriff;
+  dd.textContent = wert;
+  if (istSumme) {
+    dt.className = "summe";
+    dd.className = "summe";
+  }
+  zusammenfassung.append(dt, dd);
+}
+
+// Rechte Spalte "Ihre Buchung" mit Daten und Preis füllen
+function zusammenfassungZeigen() {
+  zusammenfassung.innerHTML = "";
+  const datenOk = anreise && abreise && abreise > anreise;
+  zusammenfassungLeer.hidden = datenOk;
+  if (!datenOk) {
+    return;
+  }
+
+  const naechte = anzahlNaechte(anreise, abreise);
+  const uebernachtungen = gesamtpreis(anreise, abreise);
+
+  zeileHinzufuegen("Anreise", schoen(anreise));
+  zeileHinzufuegen("Abreise", schoen(abreise));
+  zeileHinzufuegen("Gäste", gaesteText());
+  zeileHinzufuegen(naechte + (naechte === 1 ? " Nacht" : " Nächte"), "CHF " + uebernachtungen + ".–");
+  zeileHinzufuegen("Endreinigung", "CHF " + ENDREINIGUNG + ".–");
+  zeileHinzufuegen("Total", "CHF " + (uebernachtungen + ENDREINIGUNG) + ".–", true);
 }
 
 // Fehlermeldung bei einem Feld anzeigen oder entfernen
@@ -279,24 +319,56 @@ function fehlerSetzen(feldId, meldung) {
   feld.classList.toggle("ungueltig", meldung !== "");
 }
 
+// Pflichtfeld prüfen: leer -> Fehlermeldung, sonst Regel (regex) testen
+function textfeldPruefen(feldId, meldungLeer, regel, meldungFalsch) {
+  const wert = document.getElementById(feldId).value.trim();
+  if (wert === "") {
+    fehlerSetzen(feldId, meldungLeer);
+    return false;
+  }
+  if (regel && !regel.test(wert)) {
+    fehlerSetzen(feldId, meldungFalsch);
+    return false;
+  }
+  fehlerSetzen(feldId, "");
+  return true;
+}
+
 function formularPruefen() {
   let allesOk = true;
 
-  const name = document.getElementById("name").value.trim();
-  if (name === "") {
-    fehlerSetzen("name", "Bitte geben Sie Ihren Namen ein.");
+  // Mit "&&" würde nach dem ersten Fehler nicht mehr weitergeprüft,
+  // darum wird jedes Feld einzeln geprüft.
+  const ergebnisse = [
+    textfeldPruefen("vorname", "Bitte geben Sie Ihren Vornamen ein."),
+    textfeldPruefen("nachname", "Bitte geben Sie Ihren Nachnamen ein."),
+    // einfache Prüfung: etwas@etwas.etwas
+    textfeldPruefen("email", "Bitte geben Sie Ihre E-Mail-Adresse ein.",
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Bitte geben Sie eine gültige E-Mail-Adresse ein."),
+    // mindestens 8 Zeichen aus Ziffern, Leerzeichen, + / -
+    textfeldPruefen("telefon", "Bitte geben Sie eine Telefonnummer ein.",
+      /^\+?[\d\s\/-]{8,}$/, "Bitte geben Sie eine gültige Telefonnummer ein."),
+    textfeldPruefen("strasse", "Bitte geben Sie Strasse und Hausnummer ein."),
+    textfeldPruefen("plz", "Bitte PLZ eingeben.", /^\d{4,5}$/, "4 oder 5 Ziffern."),
+    textfeldPruefen("ort", "Bitte geben Sie Ihren Wohnort ein.")
+  ];
+  if (ergebnisse.includes(false)) {
     allesOk = false;
-  } else {
-    fehlerSetzen("name", "");
   }
 
-  const email = document.getElementById("email").value.trim();
-  // einfache Prüfung: etwas@etwas.etwas
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    fehlerSetzen("email", "Bitte geben Sie eine gültige E-Mail-Adresse ein.");
+  const gaeste = Number(feldErwachsene.value) + Number(feldKinder.value);
+  if (gaeste > MAX_GAESTE) {
+    fehlerSetzen("kinder", "Die Wohnung ist für höchstens " + MAX_GAESTE + " Personen.");
     allesOk = false;
   } else {
-    fehlerSetzen("email", "");
+    fehlerSetzen("kinder", "");
+  }
+
+  if (!document.getElementById("bedingungen").checked) {
+    fehlerSetzen("bedingungen", "Bitte bestätigen Sie, dass Sie die Hinweise gelesen haben.");
+    allesOk = false;
+  } else {
+    fehlerSetzen("bedingungen", "");
   }
 
   if (!anreise) {
@@ -332,28 +404,47 @@ formular.addEventListener("submit", function (ereignis) {
   ereignis.preventDefault(); // Seite nicht neu laden
 
   if (!formularPruefen()) {
+    // zum ersten Feld mit Fehler springen
+    const ersterFehler = formular.querySelector(".ungueltig");
+    if (ersterFehler) {
+      ersterFehler.focus();
+    }
     return;
   }
 
-  const name = document.getElementById("name").value.trim();
-  const personen = document.getElementById("personen").value;
+  const vorname = document.getElementById("vorname").value.trim();
+  const zahlung = formular.querySelector("input[name='zahlung']:checked").value;
   const preis = gesamtpreis(anreise, abreise) + ENDREINIGUNG;
 
+  // Buchungsnummer, z. B. "SB-2026-4821"
+  const nummer = "SB-" + anreise.getFullYear() + "-" + (1000 + Math.floor(Math.random() * 9000));
+
+  document.getElementById("buchungsnummer").textContent = nummer;
   document.getElementById("bestaetigung-text").textContent =
-    name + ", Ihre Anfrage für " + personen + " Person(en) vom " + schoen(anreise) +
-    " bis " + schoen(abreise) + " ist bei uns angekommen. Voraussichtlicher Preis: CHF " + preis + ".–";
+    vorname + ", Ihre Buchung für " + gaesteText() + " vom " + schoen(anreise) +
+    " bis " + schoen(abreise) + " ist bestätigt. Total: CHF " + preis + ".–, Bezahlung: " + zahlung + ".";
+
+  // Zeitraum im Kalender als belegt eintragen (nur bis die Seite neu geladen wird)
+  belegteZeitraeume.push({ von: zuText(anreise), bis: zuText(abreise) });
+  anreise = null;
+  abreise = null;
+  auswahlAnzeigen();
+  kalenderZeichnen();
 
   formular.hidden = true;
   bestaetigung.hidden = false;
+  document.getElementById("buchen").scrollIntoView();
 });
 
-document.getElementById("neue-anfrage").addEventListener("click", function () {
+document.getElementById("neue-buchung").addEventListener("click", function () {
   formular.reset();
   anreise = null;
   abreise = null;
   auswahlAnzeigen();
   kalenderZeichnen();
-  preisBerechnen();
+  zusammenfassungZeigen();
   bestaetigung.hidden = true;
   formular.hidden = false;
 });
+
+zusammenfassungZeigen();
