@@ -331,8 +331,8 @@ main a:focus-visible,
 
 .vorschau {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
 }
 
 .vorschau-bild {
@@ -433,7 +433,7 @@ main a:focus-visible,
 
 .sofortbild {
   position: relative;
-  width: 240px;
+  width: 260px;                  /* 3 pro Reihe auf dem Laptop */
   padding: 12px 12px 0;
   font: inherit;
   background-color: white;
@@ -736,7 +736,12 @@ body:has(.lightbox[open]) {
   }
 
   .vorschau {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  }
+
+  /* bei vielen Bildern: Fächer und Pinnwand etwas kompakter */
+  .sofortbild {
+    width: 200px;
   }
 }
 
@@ -798,7 +803,7 @@ body:has(.lightbox[open]) {
   /* Fächer klappt senkrecht auf */
   .faecher {
     flex-direction: column;
-    height: 560px;
+    height: 760px;
   }
 
   .faecher-text {

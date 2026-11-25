@@ -25,11 +25,46 @@ const bilder = [
     alt: "Wohnzimmer mit grünem Sofa, Holztisch und grossem Fenster zum See"
   },
   {
+    datei: "img/esstisch.jpg",
+    titel: "Esstisch",
+    kurz: "Frühstück",
+    text: "Platz für vier – Frühstück mit Blick über den See.",
+    alt: "Gedeckter Frühstückstisch aus Holz mit Gipfeli, Konfitüre und Blumen vor grossem Fenster zum See"
+  },
+  {
+    datei: "img/kueche.jpg",
+    titel: "Küche",
+    kurz: "Küche",
+    text: "Backofen, Geschirrspüler und Kaffeemaschine – und beim Abwaschen schaut man auf den See.",
+    alt: "Helle Holzküche mit Backofen, Geschirrspüler und Kaffeemaschine, Fenster mit Blick auf See und Berge"
+  },
+  {
     datei: "img/schlafzimmer.jpg",
-    titel: "Schlafzimmer",
+    titel: "Schlafzimmer mit Doppelbett",
     kurz: "Schlafzimmer",
     text: "Das Doppelbett – beim Aufwachen sieht man den See.",
     alt: "Schlafzimmer mit Doppelbett und grossem Fenster zum See"
+  },
+  {
+    datei: "img/schlafzimmer-einzelbetten.jpg",
+    titel: "Schlafzimmer mit Einzelbetten",
+    kurz: "Kinderzimmer",
+    text: "Zwei Einzelbetten – ideal für Kinder oder Freunde.",
+    alt: "Schlafzimmer mit zwei Einzelbetten, grünen Decken und Plüschhase, grosses Fenster zum See"
+  },
+  {
+    datei: "img/badezimmer.jpg",
+    titel: "Badezimmer",
+    kurz: "Badezimmer",
+    text: "Ebenerdige Dusche, Holzmöbel und frische Handtücher.",
+    alt: "Helles Badezimmer mit ebenerdiger Dusche, Lavabo auf Holzmöbel und kleinem Fenster zu den Bergen"
+  },
+  {
+    datei: "img/balkon.jpg",
+    titel: "Balkon",
+    kurz: "Balkon",
+    text: "Zwei Sessel, ein kleiner Tisch – und die Sonne geht über dem See unter.",
+    alt: "Holzbalkon mit zwei Sesseln und Weingläsern bei Sonnenuntergang über dem See"
   },
   {
     datei: "img/see.jpg",
@@ -337,7 +372,10 @@ function karussellZeigen(nummer) {
       "translateZ(" + (betrag * -220) + "px) " +
       "rotateY(" + (Math.sign(abstand) * -38) + "deg)";
     karte.style.zIndex = 10 - betrag;
-    karte.style.opacity = betrag > 1 ? 0.45 : 1;
+    // vorne voll sichtbar, daneben leicht durchsichtig, weiter hinten unsichtbar
+    karte.style.opacity = betrag > 2 ? 0 : betrag > 1 ? 0.45 : 1;
+    karte.style.pointerEvents = betrag > 2 ? "none" : "";
+    karte.tabIndex = betrag > 2 ? -1 : 0;
     karte.classList.toggle("aktiv", abstand === 0);
     karte.setAttribute("aria-label", bilder[i].titel + (abstand === 0 ? " – gross ansehen" : " – nach vorne holen"));
   });
@@ -414,8 +452,10 @@ bilder.forEach(function (bild, i) {
 // =========================================================
 document.querySelectorAll(".laufband-spur").forEach(function (spur) {
   for (let kopie = 0; kopie < 2; kopie++) {
-    // Liste pro Kopie doppelt, damit das Band auch auf breiten Bildschirmen reicht
-    for (let runde = 0; runde < 2; runde++) {
+    // Bei wenigen Bildern die Liste pro Kopie doppelt,
+    // damit das Band auch auf breiten Bildschirmen reicht
+    const runden = bilder.length < 6 ? 2 : 1;
+    for (let runde = 0; runde < runden; runde++) {
       bilder.forEach(function (bild) {
         const img = bildErstellen(bild, false);
         img.alt = ""; // Dekoration
