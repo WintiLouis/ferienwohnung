@@ -7,7 +7,7 @@ Schulprojekt zum Einstieg in die Frontendentwicklung.
 - `index.html` – Struktur der Seite
 - `styles.css` – Gestaltung
 - `app.js` – Interaktion
-- `galerie.html` – Galerie-Seite mit Diashow, Rundgang, 3D-Karussell, Pinnwand, Fächer und Laufband
+- `galerie.html` – Galerie-Seite mit Diashow, Rundgang, 3D-Karussell und Laufband
 - `galerie.css` – Gestaltung nur für die Galerie-Seite (ergänzt `styles.css`)
 - `galerie.js` – Bilderliste und Interaktion der Galerie (neue Bilder dort eintragen)
 

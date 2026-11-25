@@ -421,155 +421,7 @@ main a:focus-visible,
 }
 
 /* =========================================================
-   4. PINNWAND – Sofortbilder mit Klebeband
-   ========================================================= */
-.pinnwand {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2.5rem 2rem;
-  padding: 1rem 0;
-}
-
-.sofortbild {
-  position: relative;
-  width: 260px;                  /* 3 pro Reihe auf dem Laptop */
-  padding: 12px 12px 0;
-  font: inherit;
-  background-color: white;
-  border: none;
-  cursor: zoom-in;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 14px 28px -14px rgba(15, 61, 62, 0.4);
-  transform: rotate(var(--drehung));
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-
-/* jedes Bild etwas anders schräg */
-.sofortbild:nth-child(4n + 1) { --drehung: -4deg; }
-.sofortbild:nth-child(4n + 2) { --drehung: 3deg; }
-.sofortbild:nth-child(4n + 3) { --drehung: -1.5deg; }
-.sofortbild:nth-child(4n + 4) { --drehung: 4.5deg; }
-
-/* Klebeband oben */
-.sofortbild::before {
-  content: "";
-  position: absolute;
-  top: -11px;
-  left: 50%;
-  width: 84px;
-  height: 24px;
-  margin-left: -42px;
-  background-color: rgba(201, 214, 211, 0.75);
-  transform: rotate(-3deg);
-}
-
-.sofortbild:hover,
-.sofortbild:focus-visible {
-  z-index: 1;
-  transform: rotate(0deg) scale(1.07) translateY(-6px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08), 0 28px 44px -18px rgba(15, 61, 62, 0.5);
-}
-
-.sofortbild img {
-  width: 100%;
-  aspect-ratio: 1 / 1;           /* quadratisch wie ein Sofortbild */
-  object-fit: cover;
-}
-
-.sofortbild span {
-  display: block;
-  padding: 0.75rem 0 1rem;
-  font-family: var(--schrift-titel);
-  font-style: italic;
-  font-size: 1.1rem;
-  color: var(--farbe-haupt);
-  text-align: center;
-}
-
-/* =========================================================
-   5. FÄCHER
-   ========================================================= */
-.faecher {
-  display: flex;
-  gap: 6px;
-  height: clamp(320px, 45vw, 480px);
-}
-
-.faecher-teil {
-  position: relative;
-  flex: 1;
-  min-width: 0;
-  padding: 0;
-  overflow: hidden;
-  font: inherit;
-  background-color: var(--farbe-haupt);
-  border: none;
-  border-radius: var(--radius);
-  cursor: zoom-in;
-  transition: flex-grow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.faecher-teil img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: saturate(0.6) brightness(0.75);
-  transition: filter 0.6s;
-}
-
-.faecher-text {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 3rem 1.5rem 1.25rem;
-  text-align: left;
-  color: white;
-  background: linear-gradient(0deg, rgba(10, 40, 41, 0.85), rgba(10, 40, 41, 0));
-  opacity: 0;
-  transform: translateY(0.75rem);
-  transition: opacity 0.4s, transform 0.4s;
-}
-
-.faecher-text strong {
-  display: block;
-  font-family: var(--schrift-titel);
-  font-weight: 400;
-  font-size: 1.5rem;
-  white-space: nowrap;
-}
-
-.faecher-text span {
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* aufgeklappt: unter der Maus, mit Tastatur gewählt –
-   oder das erste, solange keines gewählt ist */
-.faecher-teil:hover,
-.faecher-teil:focus-visible,
-.faecher:not(:hover):not(:focus-within) .faecher-teil:first-child {
-  flex-grow: 4;
-}
-
-.faecher-teil:hover img,
-.faecher-teil:focus-visible img,
-.faecher:not(:hover):not(:focus-within) .faecher-teil:first-child img {
-  filter: none;
-}
-
-.faecher-teil:hover .faecher-text,
-.faecher-teil:focus-visible .faecher-text,
-.faecher:not(:hover):not(:focus-within) .faecher-teil:first-child .faecher-text {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.25s;
-}
-
-/* =========================================================
-   6. LAUFBAND
+   4. LAUFBAND
    ========================================================= */
 .laufband {
   overflow: hidden;
@@ -738,11 +590,6 @@ body:has(.lightbox[open]) {
   .vorschau {
     grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
   }
-
-  /* bei vielen Bildern: Fächer und Pinnwand etwas kompakter */
-  .sofortbild {
-    width: 200px;
-  }
 }
 
 /* =========================================================
@@ -790,30 +637,6 @@ body:has(.lightbox[open]) {
     font-size: 1.15rem;
   }
 
-  .sofortbild {
-    width: calc(50% - 1rem);
-    padding: 8px 8px 0;
-  }
-
-  .sofortbild span {
-    font-size: 0.95rem;
-    padding: 0.5rem 0 0.7rem;
-  }
-
-  /* Fächer klappt senkrecht auf */
-  .faecher {
-    flex-direction: column;
-    height: 760px;
-  }
-
-  .faecher-text {
-    padding: 2rem 1rem 0.9rem;
-  }
-
-  .faecher-text strong {
-    font-size: 1.25rem;
-  }
-
   .lightbox .pfeil {
     top: auto;
     bottom: 1rem;
@@ -833,11 +656,7 @@ body:has(.lightbox[open]) {
   .dia img,
   .dia figcaption,
   .rundgang-band,
-  .karussell-karte,
-  .sofortbild,
-  .faecher-teil,
-  .faecher-teil img,
-  .faecher-text {
+  .karussell-karte {
     transition-duration: 0.01s !important;
   }
 

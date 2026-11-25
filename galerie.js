@@ -5,7 +5,7 @@
 
 // =========================================================
 // 1. BILDER – nur hier eintragen!
-//    Alle sechs Darstellungen auf der Seite werden automatisch
+//    Alle vier Darstellungen auf der Seite werden automatisch
 //    aus dieser Liste gebaut. Neues Bild: Datei in den Ordner
 //    "img" legen und hier einen Eintrag ergänzen.
 // =========================================================
@@ -13,63 +13,54 @@ const bilder = [
   {
     datei: "img/haus.jpg",
     titel: "Das Haus",
-    kurz: "Unser Haus",
     text: "Direkt am Seeufer – mit Holzbalkon und eigenem Steg.",
     alt: "Haus am Seeufer mit Holzbalkon und Steg"
   },
   {
     datei: "img/wohnzimmer.jpg",
     titel: "Wohnzimmer",
-    kurz: "Wohnzimmer",
     text: "Grünes Sofa, Holztisch und ein grosses Fenster zum See.",
     alt: "Wohnzimmer mit grünem Sofa, Holztisch und grossem Fenster zum See"
   },
   {
     datei: "img/esstisch.jpg",
     titel: "Esstisch",
-    kurz: "Frühstück",
     text: "Platz für vier – Frühstück mit Blick über den See.",
     alt: "Gedeckter Frühstückstisch aus Holz mit Gipfeli, Konfitüre und Blumen vor grossem Fenster zum See"
   },
   {
     datei: "img/kueche.jpg",
     titel: "Küche",
-    kurz: "Küche",
     text: "Backofen, Geschirrspüler und Kaffeemaschine – und beim Abwaschen schaut man auf den See.",
     alt: "Helle Holzküche mit Backofen, Geschirrspüler und Kaffeemaschine, Fenster mit Blick auf See und Berge"
   },
   {
     datei: "img/schlafzimmer.jpg",
     titel: "Schlafzimmer mit Doppelbett",
-    kurz: "Schlafzimmer",
     text: "Das Doppelbett – beim Aufwachen sieht man den See.",
     alt: "Schlafzimmer mit Doppelbett und grossem Fenster zum See"
   },
   {
     datei: "img/schlafzimmer-einzelbetten.jpg",
     titel: "Schlafzimmer mit Einzelbetten",
-    kurz: "Kinderzimmer",
     text: "Zwei Einzelbetten – ideal für Kinder oder Freunde.",
     alt: "Schlafzimmer mit zwei Einzelbetten, grünen Decken und Plüschhase, grosses Fenster zum See"
   },
   {
     datei: "img/badezimmer.jpg",
     titel: "Badezimmer",
-    kurz: "Badezimmer",
     text: "Ebenerdige Dusche, Holzmöbel und frische Handtücher.",
     alt: "Helles Badezimmer mit ebenerdiger Dusche, Lavabo auf Holzmöbel und kleinem Fenster zu den Bergen"
   },
   {
     datei: "img/balkon.jpg",
     titel: "Balkon",
-    kurz: "Balkon",
     text: "Zwei Sessel, ein kleiner Tisch – und die Sonne geht über dem See unter.",
     alt: "Holzbalkon mit zwei Sesseln und Weingläsern bei Sonnenuntergang über dem See"
   },
   {
     datei: "img/see.jpg",
     titel: "Der See am Abend",
-    kurz: "Abends am See",
     text: "Zwei Minuten zu Fuss: der Bergsee im letzten Licht.",
     alt: "Bergsee am Abend mit Segelboot"
   }
@@ -398,53 +389,7 @@ karussellZeigen(0);
 
 
 // =========================================================
-// 8. PINNWAND – Sofortbilder
-// =========================================================
-const pinnwand = document.getElementById("pinnwand-bilder");
-
-bilder.forEach(function (bild, i) {
-  const foto = neu("button", "sofortbild");
-  foto.type = "button";
-  foto.setAttribute("aria-label", bild.titel + " – gross ansehen");
-  foto.appendChild(bildErstellen(bild, true));
-  const text = neu("span");
-  text.textContent = bild.kurz;
-  foto.appendChild(text);
-  foto.addEventListener("click", function () {
-    lightboxOeffnen(i);
-  });
-  pinnwand.appendChild(foto);
-});
-
-
-// =========================================================
-// 9. FÄCHER – das Aufklappen macht nur CSS (:hover)
-// =========================================================
-const faecher = document.getElementById("faecher-bilder");
-
-bilder.forEach(function (bild, i) {
-  const teil = neu("button", "faecher-teil");
-  teil.type = "button";
-  teil.setAttribute("aria-label", bild.titel + " – gross ansehen");
-  teil.appendChild(bildErstellen(bild, true));
-
-  const text = neu("span", "faecher-text");
-  const titel = neu("strong");
-  titel.textContent = bild.titel;
-  const beschreibung = neu("span");
-  beschreibung.textContent = bild.text;
-  text.append(titel, beschreibung);
-  teil.appendChild(text);
-
-  teil.addEventListener("click", function () {
-    lightboxOeffnen(i);
-  });
-  faecher.appendChild(teil);
-});
-
-
-// =========================================================
-// 10. LAUFBAND
+// 8. LAUFBAND
 //     Die Bilder kommen zweimal hintereinander ins Band.
 //     Die CSS-Animation schiebt das Band um die Hälfte nach
 //     links – dann sieht es genau aus wie am Anfang und die
